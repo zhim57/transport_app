@@ -34,22 +34,24 @@ function Tasks() {
                             <ListItem key={task._id}>
                                 <a href={"/task/" + task._id}>
                                     <h1>{task.taskStartPoint}</h1>
-                                    <h1>{task.taskEndPoint}</h1>
                                 </a>
-                                <h2>${task.timeCreated}</h2>
-                                <h2>${task.timeTargetTime}</h2>
-                                <h2>${task.timeActual}</h2>
-                                <h2>${task.timeCompleted}</h2>
-                                <h2>${task.clientNameLast}</h2>
-                                <h2>${task.clientNameFirst}</h2>
-                                <h2>${task.peopleCount}</h2>
-                                <h2>${task.vesselName}</h2>
-                                <h2>${task.terminalName}</h2>
+                                    <h1>{task.taskEndPoint}</h1>
+                                <img src={task.clientImage} alt="clients Face"></img>
+                                <h2>time created: {task.timeCreated}</h2>
+                                <h2>target Time for the Job : {task.timeTargetTime}</h2>
+                                <h2>Actual Time pick up: {task.timeActual}</h2>
+                                <h2>time completed: {task.timeCompleted}</h2>
+                                <h2>Client Last Name : {task.clientNameLast}</h2>
+                                <h2>clients first Name : {task.clientNameFirst}</h2>
+                                <h2>driver : {task.driverName}</h2>
+                                <img src={task.driverImage} alt="Driver Face"></img>
+                                <h2>people: {task.peopleCount}</h2>
+                                <h2>vessel Name: {task.vesselName}</h2>
+                                <h2>terminal name: {task.terminalName}</h2>
 
                                 <p>{task.description}</p>
                                 <p>Job Number: {task.taskNumber}</p>
-                                <p>{task.clientImage}</p>
-                                <img src={task.driverImage} alt="Driver Face"></img>
+                                {/* <p>{task.clientImage}</p> */}
                                 <img src={task.vehicleImage} alt="transport van"></img>
                             </ListItem>
                         );

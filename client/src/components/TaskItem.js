@@ -103,7 +103,7 @@ function TaskItem(props) {
     <div>
       <h4>
         | Pick up Location | destination | Time pick up | Client Avatar | Client
-        Name | Plate # | description | People # | Driver's Avatar
+        Name | Plate # | description | People # | Driver's Avatar | Van's Image
       </h4>
       {tasks.map((task) => (
         <div key={task.taskStartPoint} className="row-tasks">
@@ -136,6 +136,11 @@ function TaskItem(props) {
               // data-incart={task.inCart}
               // data-itemNumber={task.vehiclePlate}
             />
+            <img
+              src={task.vehicleImage}
+              alt={task.vehicleImage}
+              className="row-image"
+              />
             {/* </Link> */}
             {/* <button
                 className="cart-btn"

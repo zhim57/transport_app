@@ -31,5 +31,8 @@ export default {
     },
     getUser: function(){
       return axios.get("/api/user/data");
-    }
+    },
+    getUserData: function() {
+        return axios.get("/api/user/data");
+      }
   };

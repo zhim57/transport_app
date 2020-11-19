@@ -10,8 +10,14 @@ const userSchema = new Schema(
         email: { type: String, required: true, unique: true },
         // kyle added 12
         password: { type: String, required: true },
-        date: { type: Date, default: Date.now }
-    }
+        date: { type: Date, default: Date.now },
+        role:{ type: String, required: true },
+        nameFirst:{ type: String, required: true },
+        nameLast:{ type: String, required: true },
+        vesselName:{ type: String, required: false },
+        position:{ type: String, required: false },
+        profilePicture:{type: String, required: false }
+    }  
 );
 // kyle added 17-40
 userSchema.pre('save', function(next) {
