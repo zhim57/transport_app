@@ -14,11 +14,11 @@ function SignUpForm(props) {
     var passwordVal = new passwordValidator();
 
     passwordVal
-        .is().min(8)                                    // Minimum length 8
+        .is().min(6)                                    // Minimum length 6
         .is().max(100)                                  // Maximum length 100
         .has().uppercase()                              // Must have uppercase letters
         .has().lowercase()                              // Must have lowercase letters
-        .has().digits(2)                                // Must have at least 2 digits
+        .has().digits(1)                                // Must have at least 1 digit
         .has().not().spaces()                           // Should not have spaces
         .is().not().oneOf(['Passw0rd', 'Password123']) // Blacklist these values
         .has().symbols(1);                              // Must have 1 symbol
@@ -57,8 +57,8 @@ function SignUpForm(props) {
                 console.log(err);
             });
         }else {
-            console.log('password failed')
-            setpasswordGood(false);
+            console.log('password failed ,Min length 6,  Max 100 , need a CAP,  a lower case at least 1 digit , 1 symbol, no spaces  ')
+           
         }
 
 
