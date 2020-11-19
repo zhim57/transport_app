@@ -7,7 +7,7 @@ import '../App.css';
 function TaskList(props) {
   return (
     <div className="py-5">
-      <div className="container">
+      <div className="container-tasks">
         <Title name="Current" title="transport jobs" />
         {/* <div className="row-tasks"> */}
           {/* <ProductConsumer> */}

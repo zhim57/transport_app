@@ -103,33 +103,37 @@ function TaskItem(props) {
       {tasks.map((task) => (
         <div key={task.taskStartPoint} className="row-tasks">
           {console.log(task)}
-         
-            {task.taskStartPoint}
-            {task.taskEndPoint}
-            {task.timeTargetTime}
-            {task.clientNameFirst}
-            {task.clientNameFirst}
-            {task.driverNameFirst}
-            {task.vehiclePlate}
+          <h4>
+
+
+             |  {task.taskStartPoint}
+             |  {task.taskEndPoint}
+             |  {task.timeTargetTime}
+             |  {task.clientNameFirst}
+             |  {task.clientNameFirst}
+             |  {task.driverNameFirst}
+             |  {task.vehiclePlate}
           
+            | {task.description}
+              | People: {task.peopleCount} 
 
             {/* <div onClick={() => { value.handleDetail(id); }} className="img-container p-5"> */}
        
-            <img
+             |  <img
               src={task.driverImage}
               alt={task.driverImage}
               className="row-image"
               // onClick={handleItemDetails}
 
-              data-name={task.description}
-              data-image={task.driverImage}
-              // data-available={task.isAvailable}
-              data-id={task._id}
+              // data-name={task.description}
+              // data-image={task.driverImage}
+              // // data-available={task.isAvailable}
+              // data-id={task._id}
               // data-shipping={task.shippingCost}
               // data-price={task.price}
               // data-description={task.description}
               // data-incart={task.inCart}
-              data-itemNumber={task.vehiclePlate}
+              // data-itemNumber={task.vehiclePlate}
             />
 
             {/* </Link> */}
@@ -145,18 +149,18 @@ function TaskItem(props) {
                 data-task={task._id}
                 data-price={task.price.toString()}
               >
-                In Cart
+               placeholder text
               </p>
             ) : (
               <p
-                className="text-capitalize mb-0"
+                // className="text-capitalize mb-0"
                 // data-name={task.taskName}
                 // data-image={task.image}
                 // data-available={task.isAvailable}
                 // data-id={task._id}
                 // data-shipping={task.shippingCost}
                 // data-price={task.price}
-                data-description={task.description}
+                // data-description={task.description}
               >
                 {/* Add to Cart <i className="fa fa-cart-plus" /> */}
               </p>
@@ -167,11 +171,11 @@ function TaskItem(props) {
             {/* </Products> */}
             {/* </taskConsumer> */}
             {/* <div className="card-footer d-flex justify-content-between"> */}
-            <p className="align-serl-center mb-0">{task.description}</p>
             {/* <h5 className="text-blue font-italic mb-0"> */}
-              <span className="people-count">${task.peopleCount}</span>
             {/* </h5> */}
           {/* </div> */}
+          </h4>
+         
           
           
         </div>
