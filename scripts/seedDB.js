@@ -28,8 +28,8 @@ const TasksSeed = [
 
         description:"Transport",
         taskNumber:1,
-        clientImage:"./images/clientImage.jpg",
-        driverImage: "./images/driverImage.jpg",
+        clientImage:"./clientImage1.jpg",
+        driverImage: "./driverImage1.jpg",
         vehicleImage:"./vanImage.jpg",
         driverName: "Flash Gordon Jr.",
         vehiclePlate: "NJS-47V"
@@ -51,8 +51,8 @@ const TasksSeed = [
 
         description:"Transport",
         taskNumber:1,
-        clientImage:"./1.jpg",
-        driverImage: "../../src/images/driverImage.jpg",
+        clientImage:"./clientImage1.jpg",
+        driverImage: "./driverImage1.jpg",
         vehicleImage:"./vanImage.jpg",
         driverName: "Flash Gordon Sr.",
         vehiclePlate: "SCI-21Z"
