@@ -1,7 +1,6 @@
-                            // kyle added useState, Fragment and useContext
 import React, {  useState, Fragment, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import Logo from '../logo.jpg';
+import Logo from '../logo.png';
 import styled from 'styled-components';
 import { ButtonContainer } from './Button';
 import UserContext from "../utils/UserContext";
@@ -32,7 +31,7 @@ function Navbar(props)  {
                 <ul className="navbar-nav align-items-center">
                     <li className="nav-item ml-5">
                         <Link to='/' className="nav-link" >
-                            Products
+                           Tasks
                         </Link>
                     </li>
                 </ul>
@@ -71,7 +70,7 @@ function Navbar(props)  {
             </ButtonContainer>
         </Link>) }
 
-
+{/* 
         <Link to='/cart' className="ml-auto" >
                     <ButtonContainer>
                         <span className="mr-2">
@@ -79,7 +78,7 @@ function Navbar(props)  {
                         </span>
                         My Cart
                     </ButtonContainer>
-                </Link>
+                </Link> */}
       
 
 
