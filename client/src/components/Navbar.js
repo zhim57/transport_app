@@ -12,7 +12,7 @@ function Navbar(props)  {
         const [loginExpanded, setLoginExpanded] = useState(false);
         const {email, loggedIn} = useContext(UserContext);
         return (
-            <NavWrapper className="navbar navbar-expand-sm navbar-dark px-sm-5">
+            <NavWrapper className="navbar navbar-expand-sm navbar-dark px-sm-5 row-tasks">
              
                 <Link to='/'>
                     <img className="logo" src={Logo} alt="logo" />
@@ -102,6 +102,14 @@ background: var(--mainBlue);
         font-size:14px;
         color: white;
     }
+},
+.row-tasks {
+  display: flex;
+flex-direction: row;
+background-color: #282c34;
+padding:10px;
+margin-top: 20px;
+color:white;
 }
 `
 

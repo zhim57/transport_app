@@ -135,7 +135,7 @@ function TaskItem(props) {
               // data-description={task.description}
               // data-incart={task.inCart}
               // data-itemNumber={task.vehiclePlate}
-            />
+            /> | 
             <img
               src={task.vehicleImage}
               alt={task.vehicleImage}

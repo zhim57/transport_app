@@ -30,7 +30,7 @@ const TasksSeed = [
         taskNumber:1,
         clientImage:"./clientImage1.jpg",
         driverImage: "./driverImage1.jpg",
-        vehicleImage:"./vanImage.jpg",
+        vehicleImage:"./vanImage.png",
         driverName: "Flash Gordon Jr.",
         vehiclePlate: "NJS-47V"
 
@@ -53,7 +53,7 @@ const TasksSeed = [
         taskNumber:1,
         clientImage:"./clientImage1.jpg",
         driverImage: "./driverImage1.jpg",
-        vehicleImage:"./vanImage.jpg",
+        vehicleImage:"./vanImage.png",
         driverName: "Flash Gordon Sr.",
         vehiclePlate: "SCI-21Z"
     }
