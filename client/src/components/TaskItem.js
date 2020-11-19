@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"; // useContext, ,useCallback
 // import { Link } from "react-router-dom";  // , useHistory
 import API from "../utils/API";
+
 // import "./style.css";
 // import CartContext from "../utils/CartContext";
 // import Details from '../components/Details'
@@ -99,27 +100,27 @@ function TaskItem(props) {
   // const { title, img, price, inCart, id } = props.task
 
   return (
-    <div >
+    <div>
+      <h4>
+        | Pick up Location | destination | Time pick up | Client Avatar | Client
+        Name | Plate # | description | People # | Driver's Avatar
+      </h4>
       {tasks.map((task) => (
         <div key={task.taskStartPoint} className="row-tasks">
           {console.log(task)}
           <h4>
-
-
-             |  {task.taskStartPoint}
-             |  {task.taskEndPoint}
-             |  {task.timeTargetTime}
-             |  {task.clientNameFirst}
-             |  {task.clientNameFirst}
-             |  {task.driverNameFirst}
-             |  {task.vehiclePlate}
-          
-            | {task.description}
-              | People: {task.peopleCount} 
-
+            | {task.taskStartPoint}| {task.taskEndPoint}| {task.timeTargetTime}
+            |{" "}
+            <img
+              src={task.clientImage}
+              alt={task.clientImage}
+              className="row-image"
+            />
+            | {task.clientNameFirst}| {task.driverNameFirst}|{" "}
+            {task.vehiclePlate}| {task.description}| People: {task.peopleCount}
             {/* <div onClick={() => { value.handleDetail(id); }} className="img-container p-5"> */}
-       
-             |  <img
+            |{" "}
+            <img
               src={task.driverImage}
               alt={task.driverImage}
               className="row-image"
@@ -135,7 +136,6 @@ function TaskItem(props) {
               // data-incart={task.inCart}
               // data-itemNumber={task.vehiclePlate}
             />
-
             {/* </Link> */}
             {/* <button
                 className="cart-btn"
@@ -149,35 +149,31 @@ function TaskItem(props) {
                 data-task={task._id}
                 data-price={task.price.toString()}
               >
-               placeholder text
+                placeholder text
               </p>
             ) : (
               <p
-                // className="text-capitalize mb-0"
-                // data-name={task.taskName}
-                // data-image={task.image}
-                // data-available={task.isAvailable}
-                // data-id={task._id}
-                // data-shipping={task.shippingCost}
-                // data-price={task.price}
-                // data-description={task.description}
+              // className="text-capitalize mb-0"
+              // data-name={task.taskName}
+              // data-image={task.image}
+              // data-available={task.isAvailable}
+              // data-id={task._id}
+              // data-shipping={task.shippingCost}
+              // data-price={task.price}
+              // data-description={task.description}
               >
                 {/* Add to Cart <i className="fa fa-cart-plus" /> */}
               </p>
             )}
             {/* </button> */}
             {/* </div> */}
-
             {/* </Products> */}
             {/* </taskConsumer> */}
             {/* <div className="card-footer d-flex justify-content-between"> */}
             {/* <h5 className="text-blue font-italic mb-0"> */}
             {/* </h5> */}
-          {/* </div> */}
+            {/* </div> */}
           </h4>
-         
-          
-          
         </div>
       ))}
     </div>

@@ -16,7 +16,7 @@ const TasksSeed = [
         taskStartPoint: "PNCT",
         taskEndPoint: "jersey Gardens gate 5",
         timeCreated: new Date(Date.now()),
-        timeTargetTime: new Date(Date.now()),
+        timeTargetTime:"18:00",
         timeActual: new Date(Date.now()),
         timeCompleted: new Date(Date.now()),
         clientNameLast:"Smith",
@@ -28,8 +28,8 @@ const TasksSeed = [
 
         description:"Transport",
         taskNumber:1,
-        clientImage:"./clientImage.jpg",
-        driverImage: "./driverImage.jpg",
+        clientImage:"./images/clientImage.jpg",
+        driverImage: "./images/driverImage.jpg",
         vehicleImage:"./vanImage.jpg",
         driverName: "Flash Gordon Jr.",
         vehiclePlate: "NJS-47V"
@@ -38,8 +38,8 @@ const TasksSeed = [
     {
         taskStartPoint: "APM",
         taskEndPoint: "jersey Gardens gate 5",
-        timeCreated: new Date(Date.now()),
-        timeTargetTime: new Date(Date.now()),
+        timeCreated: new Date("HH:MM"),
+        timeTargetTime: "17:45",
         timeActual: new Date(Date.now()),
         timeCompleted: new Date(Date.now()),
         clientNameLast:"Smithson",
@@ -51,8 +51,8 @@ const TasksSeed = [
 
         description:"Transport",
         taskNumber:1,
-        clientImage:"./clientImage.jpg",
-        driverImage: "./driverImage.jpg",
+        clientImage:"./1.jpg",
+        driverImage: "../../src/images/driverImage.jpg",
         vehicleImage:"./vanImage.jpg",
         driverName: "Flash Gordon Sr.",
         vehiclePlate: "SCI-21Z"

@@ -32,7 +32,7 @@ const tasksSchema = new Schema(
         taskStartPoint: { type: String, required: true, unique: false },
         taskEndPoint: { type: String, required: true, unique: false },
         timeCreated: { type: Date, default: Date.now },
-        timeTargetTime: { type: Date, default: Date.now },
+        timeTargetTime: { type: String, required: true },
         timeActual: { type: Date, default: Date.now },
         timeCompleted: { type: Date, default: Date.now },
        
