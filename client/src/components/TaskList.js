@@ -1,6 +1,7 @@
 import React from "react";
 import TaskItem from "./TaskItem";
 import Title from "./Title";
+import '../App.css';
 // import CustomCarousel from './CustomCarousel/CustomCarousel'
 
 function TaskList(props) {
@@ -8,7 +9,7 @@ function TaskList(props) {
     <div className="py-5">
       <div className="container">
         <Title name="Current" title="transport jobs" />
-        <div className="row">
+        {/* <div className="row-tasks"> */}
           {/* <ProductConsumer> */}
           {/* {value => {
                                 return value.products.map(product => {
@@ -19,7 +20,7 @@ function TaskList(props) {
           {/* </ProductConsumer> */}
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
 

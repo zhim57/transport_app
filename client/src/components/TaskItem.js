@@ -99,12 +99,18 @@ function TaskItem(props) {
   // const { title, img, price, inCart, id } = props.task
 
   return (
-    <div className="row">
+    <div >
       {tasks.map((task) => (
-        <div key={task.taskStartPoint} className="task-row">
+        <div key={task.taskStartPoint} className="row-tasks">
           {console.log(task)}
-          <p>
-            {/* <taskConsumer> */}
+         
+            {task.taskStartPoint}
+            {task.taskEndPoint}
+            {task.timeTargetTime}
+            {task.clientNameFirst}
+            {task.clientNameFirst}
+            {task.driverNameFirst}
+            {task.vehiclePlate}
           
 
             {/* <div onClick={() => { value.handleDetail(id); }} className="img-container p-5"> */}
@@ -112,7 +118,7 @@ function TaskItem(props) {
             <img
               src={task.driverImage}
               alt={task.driverImage}
-              className="card-img-top"
+              className="row-image"
               // onClick={handleItemDetails}
 
               data-name={task.description}
@@ -166,7 +172,7 @@ function TaskItem(props) {
               <span className="people-count">${task.peopleCount}</span>
             {/* </h5> */}
           {/* </div> */}
-          </p>
+          
           
         </div>
       ))}
