@@ -1,23 +1,23 @@
-import React, {  useState, Fragment, useContext } from 'react';
+import React, { useState, Fragment, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../logo.png';
 import styled from 'styled-components';
-import { ButtonContainer } from './Button';
+// import { ButtonContainer } from './Button';
 import UserContext from "../utils/UserContext";
 import LoginForm from "../components/LoginForm";
 
-function Navbar(props)  {
-    
-        // kyle added 11-12
-        const [loginExpanded, setLoginExpanded] = useState(false);
-        const {email, loggedIn} = useContext(UserContext);
-        return (
-            <NavWrapper className="navbar navbar-expand-sm navbar-dark px-sm-5 row-tasks">
-             
-                <Link to='/'>
-                    <img className="logo" src={Logo} alt="logo" />
-                </Link>
-                {/* { !loginExpanded && <button onClick= {() => setLoginExpanded(true)}>Login</button>}
+function Navbar(props) {
+
+  // kyle added 11-12
+  const [loginExpanded, setLoginExpanded] = useState(false);
+  const { email, loggedIn } = useContext(UserContext);
+  return (
+    <NavWrapper className="navbar navbar-expand-sm navbar-dark px-sm-5 row-tasks">
+
+      <Link to='/'>
+        <img className="logo" src={Logo} alt="logo" />
+      </Link>
+      {/* { !loginExpanded && <button onClick= {() => setLoginExpanded(true)}>Login</button>}
                 { loginExpanded && 
                 (() =>
                 <Fragment>
@@ -28,49 +28,46 @@ function Navbar(props)  {
                 </Fragment>
                 )()
 } */}
-                <ul className="navbar-nav align-items-center">
-                    <li className="nav-item ml-5">
-                        <Link to='/' className="nav-link" >
-                           Tasks
-                        </Link>
-                    </li>
-                </ul>
-            
+      <ul className="navbar-nav align-items-center">
+        <li className="nav-item ml-5 ">
+          <Link className="" to='/' className="btn btn-secondary" >
+            Tasks
+          </Link>
+        </li>
+      </ul>
 
-                {/* kyle added 35-52*/}
-                { (() => {
-        if(loggedIn){
-          return <p className="logged-in-text">Logged in as {email} <Link className="btn btn-dark" to="/logout" onClick={ () => setLoginExpanded(false)}>Logout <span><i className="fa fa-sign-out" aria-hidden="true"></i></span> </Link> </p>;
+
+      {/* kyle added 35-52*/}
+      { (() => {
+        if (loggedIn) {
+          return <p className="logged-in-text">Logged in as {email} <Link className="btn btn-dark" to="/logout" onClick={() => setLoginExpanded(false)}>Logout <span><i className="fa fa-sign-out" aria-hidden="true"></i></span> </Link> </p>;
         }
-        else{
-          if(!loginExpanded){
-            return(
+        else {
+          if (!loginExpanded) {
+            return (
               <>
-            <button className="btn btn-secondary" onClick={ () => setLoginExpanded(true) }>Login <span><i className="fa fa-sign-in" aria-hidden="true"></i></span> </button>
-           
-        </>
+                <button className="btn btn-secondary" onClick={() => setLoginExpanded(true)}>Login <span><i className="fa fa-sign-in" aria-hidden="true"></i></span> </button>
+
+              </>
             );
           }
-          else{
+          else {
             return (
               <Fragment>
-                <LoginForm className="top-menu-login"/>
-                <button onClick={ () => setLoginExpanded(false) }>X</button>
+                <LoginForm className="top-menu-login" />
+                <button onClick={() => setLoginExpanded(false)}>X</button>
               </Fragment>
             )
-          } 
+          }
         }
       })()}
-      {(loggedIn) ? null : (<Link to='/signup' className="ml-left" >
-            <ButtonContainer>
-                <span className="mr-2">
-                   <i className="fas fa-user-alt"></i>
-                </span>
+      {(loggedIn) ? null : (<Link to='/signup' className="ml-left btn btn-primary" >
+        {/* <ButtonContainer> */}
                 Sign Up
-            </ButtonContainer>
-        </Link>) }
+        {/* </ButtonContainer> */}
+      </Link>)}
 
-{/* 
+      {/* 
         <Link to='/cart' className="ml-auto" >
                     <ButtonContainer>
                         <span className="mr-2">
@@ -79,13 +76,13 @@ function Navbar(props)  {
                         My Cart
                     </ButtonContainer>
                 </Link> */}
-      
 
 
 
-            </NavWrapper>
-        )
-    
+
+    </NavWrapper>
+  )
+
 }
 
 const NavWrapper = styled.nav`
