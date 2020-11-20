@@ -30,7 +30,8 @@ router.post("/signup", (req, res) => {
     db.User.create({
         email: req.body.email,
         password: req.body.password,
-        name: req.body.name
+        name: req.body.name,
+        role: req.body.role
     })
     .then(data => {
         res.json({email: data.email});
@@ -60,9 +61,10 @@ router.get("/data", (req, res) => {
             _id: req.user._id,
 //cludinary stuff pigiback
             username: req.user.name,
-        profilePicture: req.user.profilePicture,
-        cloudUploadName: process.env.CLAUDINARY_CLOUDNAME,
-        cloudUploadPreset: process.env.CLAUDINARY_PRESET
+            role: req.user.role,
+            profilePicture: req.user.profilePicture,
+            cloudUploadName: process.env.CLAUDINARY_CLOUDNAME,
+            cloudUploadPreset: process.env.CLAUDINARY_PRESET
         });
     }
 });
