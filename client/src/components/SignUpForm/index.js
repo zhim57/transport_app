@@ -5,7 +5,7 @@ import UserContext from '../../utils/UserContext';
 import passwordValidator from "password-validator";
 
 function SignUpForm(props) {
-    const { email, setEmail, loggedIn, setLoggedIn } = useContext(UserContext);
+    const { email, setEmail, loggedIn, setLoggedIn, role, setRole } = useContext(UserContext);
     const emailInput = useRef();
     const passwordInput = useRef();
     const nameInput = useRef();
@@ -58,6 +58,9 @@ function SignUpForm(props) {
                 console.log(data);
                 setEmail(data.data.email);
                 setLoggedIn(true);
+                setRole(data.data.role);
+                setpasswordGood(passwordInput.current.value);
+                console.log(passwordInput.current.value);
             })
             .catch(err => {
                 console.log(err);
@@ -93,9 +96,9 @@ function SignUpForm(props) {
                         </div>
                         <div className="form-group">
                             <label htmlFor={roleId}>Role</label>
-                            <select className="form-control" ref={roleInput} id={roleId} size="2" >
-                                <option value="driver">Driver</option>
-                                <option value="customer">Customer</option>
+                            <select className="form-control" ref={roleInput} type="text" id={roleId} size="2" >
+                                <option type="text" ref={roleInput} value="driver">Driver</option>
+                                <option type="text" ref={roleInput} value="customer">Customer</option>
                             </select>
                             
                         </div>
@@ -104,7 +107,7 @@ function SignUpForm(props) {
                     );
                 }
                 else {
-                    return <h3>{email}</h3>;
+                return <h3>{email}</h3>;
                 }
             })()
             }

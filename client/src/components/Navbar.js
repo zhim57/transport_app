@@ -10,7 +10,7 @@ function Navbar(props) {
 
   // kyle added 11-12
   const [loginExpanded, setLoginExpanded] = useState(false);
-  const { email, loggedIn } = useContext(UserContext);
+  const { email, loggedIn, role } = useContext(UserContext);
   return (
     <NavWrapper className="navbar navbar-expand-sm navbar-dark px-sm-5 row-tasks">
 
@@ -30,7 +30,7 @@ function Navbar(props) {
 } */}
       <ul className="navbar-nav align-items-center">
         <li className="nav-item ml-5 ">
-          <Link  to='/' className="btn btn-secondary" >
+          <Link to='/' className="btn btn-secondary" >
             Tasks
           </Link>
         </li>
@@ -40,7 +40,7 @@ function Navbar(props) {
       {/* kyle added 35-52*/}
       { (() => {
         if (loggedIn) {
-          return <p className="logged-in-text">Logged in as {email} <Link className="btn btn-dark" to="/logout" onClick={() => setLoginExpanded(false)}>Logout <span><i className="fa fa-sign-out" aria-hidden="true"></i></span> </Link> </p>;
+          return <p className="logged-in-text">Logged in as {email} : {role} <Link className="btn btn-dark" to="/logout" onClick={() => setLoginExpanded(false)}>Logout <span><i className="fa fa-sign-out" aria-hidden="true"></i></span> </Link> </p>;
         }
         else {
           if (!loginExpanded) {
