@@ -32,14 +32,14 @@ function App() {
     <Router>
       <React.Fragment>
           <UserContext.Provider value={{ email, setEmail, loggedIn, setLoggedIn, role}}>
-          {console.log("Console Logging: " + JSON.stringify(role))}
+          {console.log("Role of User logged in: " + JSON.stringify(role))}
             <div>
               <Navbar />
               <Switch>
                   <Route exact path='/tasks' component={Tasks} />
                 <Route exact path='/'>
                   {/* {console.log("Console Logging: " + {email})} */}
-                  <h1>{JSON.stringify(role)}</h1>
+                  {/* <h1>{JSON.stringify(role)}</h1> */}
                   <TaskList />
                 </Route>
                 <Route exact path="/login">
