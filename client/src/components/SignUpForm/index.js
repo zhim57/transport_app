@@ -9,6 +9,7 @@ function SignUpForm(props) {
     const emailInput = useRef();
     const passwordInput = useRef();
     const nameInput = useRef();
+    const roleInput = useRef();
     const [passwordGood, setpasswordGood] = useState(true)
 
     var passwordVal = new passwordValidator();
@@ -32,6 +33,7 @@ function SignUpForm(props) {
     let emailHelpId = props.className ? props.className + "-signup-email-help" : "signup-email-help";
     let passwordId = props.className ? props.className + "-signup-password" : "signup-password";
     let nameId = props.className ? props.className + "-signup-name" : "signup-name";
+    let roleId = props.className ? props.className + "-signup-role" : "signup-role";
 
     const handleSubmit = event => {
         // if the user hits enter or hits the button, this function will fire
@@ -47,7 +49,7 @@ function SignUpForm(props) {
         // });
         if(passwordVal.validate(passwordInput.current.value)){
             console.log('password is good')
-            API.signup({ email: emailInput.current.value, password: passwordInput.current.value, name: nameInput.current.value })
+            API.signup({ email: emailInput.current.value, password: passwordInput.current.value, name: nameInput.current.value, role: roleInput.current.value })
             .then(data => {
                 console.log(data);
                 setEmail(data.data.email);
@@ -85,6 +87,14 @@ function SignUpForm(props) {
                             <label htmlFor={passwordId}>Password</label>
                             <input ref={passwordInput} type="password" className="form-control" id={passwordId} />
                             {(!passwordGood) ? <h2>Password failed, try again</h2> : null }
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor={roleId}>Role</label>
+                            <select className="form-control" ref={roleInput} id={roleId} size="2" >
+                                <option value="driver">Driver</option>
+                                <option value="customer">Customer</option>
+                            </select>
+                            
                         </div>
                         <button type="submit" className="btn btn-primary">Sign Up</button>
                     </form>
