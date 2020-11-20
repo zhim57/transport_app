@@ -9,6 +9,8 @@ import Logout from "./pages/Logout";
 import SignUp from "./pages/SignUp";
 import TaskList from './components/TaskList';
 import Tasks from './pages/Tasks';
+import DriversScreen from './components/driversScreen';
+
 
 
 
@@ -16,62 +18,30 @@ import Tasks from './pages/Tasks';
 function App() {
   const [email, setEmail] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
-  // const [apiResult, setApiResult] = useState();
-
-  // useEffect( () => {
-  //   // on load run this api call
-  //   API.testApi()
-  //   .then( result => {
-  //     setApiResult(result);
-  //   })
-  //   .catch( err => {
-  //     console.log(err);
-  //   });
-  // }, []);
-  // console.log(apiResult);
+  const [role] = useState("");
+  // console.log(email.value)
+  // const { role } = useContext(UserContext);
+  // console.log(role);
 
   useEffect(() => {
     // uses the react life cycle to update the page's state or context,
     // with global context it updates the entire app
-     
   }, []);
-
-
-
-
 
   return (
     <Router>
       <React.Fragment>
-       
-          <UserContext.Provider value={{ email, setEmail, loggedIn, setLoggedIn }}>
+          <UserContext.Provider value={{ email, setEmail, loggedIn, setLoggedIn, role}}>
+          {console.log("Console Logging: " + JSON.stringify(role))}
             <div>
               <Navbar />
               <Switch>
                   <Route exact path='/tasks' component={Tasks} />
                 <Route exact path='/'>
-                  {/* <CustomCarousel /> */}
+                  {/* {console.log("Console Logging: " + {email})} */}
+                  <h1>{JSON.stringify(role)}</h1>
                   <TaskList />
                 </Route>
-                {/* <Route exact path='/cart'>
-                  <Cart
-                    checkoutButton={
-                      <Button className="btn btn-lg btn-block btn-success text-uppercase" variant="primary" onClick={() => setModalShow(true)}>
-                        Checkout
-                </Button>
-                    }
-                  /> */}
-                  {/* <CheckoutModal
-                    show={modalShow}
-                    onHide={() => setModalShow(false)}
-                    modalBody={<CheckoutModalBody />}
-                  />
-
-                </Route> */}
-                {/* <Route exact path='/details' component={Details} >
-                  <Details pDetail={productDetail} />
-                </Route> */}
-                {/* kyle added 39-47*/}
                 <Route exact path="/login">
                   <Login />
                 </Route>
@@ -81,16 +51,12 @@ function App() {
                 <Route exact path="/logout">
                   <Logout />
                 </Route>
-                {/* <Route exact path="/checkoutTest">
-                  <CheckoutModalBody />
-                </Route> */}
+                <Route exact path="/driver">
+                  <DriversScreen />
+                </Route>
               </Switch>
-              {/* kyle added 47-48 and 51*/}
             </div>
           </UserContext.Provider>
-        
-
-
       </React.Fragment>
     </Router>
   );
