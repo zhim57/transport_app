@@ -52,9 +52,13 @@ function SignUpForm(props) {
                 console.log(data);
                 setEmail(data.data.email);
                 setLoggedIn(true);
+                setpasswordGood(passwordInput.current.value);
+                console.log(passwordInput.current.value);
             })
             .catch(err => {
                 console.log(err);
+                console.log('password failed ,Min length 6,  Max 100 , need a CAP,  a lower case at least 1 digit , 1 symbol, no spaces  ');
+                
             });
         }else {
             console.log('password failed ,Min length 6,  Max 100 , need a CAP,  a lower case at least 1 digit , 1 symbol, no spaces  ')
