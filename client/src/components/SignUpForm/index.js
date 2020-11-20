@@ -47,13 +47,14 @@ function SignUpForm(props) {
         // });
         if(passwordVal.validate(passwordInput.current.value)){
             console.log('password is good')
+            setpasswordGood(true);
+            console.log(passwordInput.current.value);
+            console.log(passwordGood);
             API.signup({ email: emailInput.current.value, password: passwordInput.current.value, name: nameInput.current.value })
             .then(data => {
                 console.log(data);
                 setEmail(data.data.email);
                 setLoggedIn(true);
-                setpasswordGood(passwordInput.current.value);
-                console.log(passwordInput.current.value);
             })
             .catch(err => {
                 console.log(err);
@@ -61,6 +62,7 @@ function SignUpForm(props) {
                 
             });
         }else {
+            setpasswordGood(false);
             console.log('password failed ,Min length 6,  Max 100 , need a CAP,  a lower case at least 1 digit , 1 symbol, no spaces  ')
            
         }
@@ -84,7 +86,7 @@ function SignUpForm(props) {
                         <div className="form-group">
                             <label htmlFor={passwordId}>Password</label>
                             <input ref={passwordInput} type="password" className="form-control" id={passwordId} />
-                            {(!passwordGood) ? <h2>Password failed, try again</h2> : null }
+                            {(!passwordGood) ? <h2>Password failed, try again, Min length 6,  Max 100 , need a CAP,  a lower case at least 1 digit , 1 symbol, no spaces</h2> : null }
                         </div>
                         <button type="submit" className="btn btn-primary">Sign Up</button>
                     </form>

@@ -30,7 +30,7 @@ function Navbar(props) {
 } */}
       <ul className="navbar-nav align-items-center">
         <li className="nav-item ml-5 ">
-          <Link className="" to='/' className="btn btn-secondary" >
+          <Link  to='/' className="btn btn-secondary" >
             Tasks
           </Link>
         </li>
