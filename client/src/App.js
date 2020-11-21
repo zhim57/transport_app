@@ -12,6 +12,9 @@ import Tasks from "./pages/Tasks";
 import Profile from "./pages/Profile";
 import Settask from "./pages/Settask";
 import API from "./utils/API";
+import DriversScreen from './components/driversScreen';
+
+
 
 function App() {
   console.log("user-context");
@@ -21,6 +24,10 @@ function App() {
 
   const [email, setEmail] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
+  const [role] = useState("");
+  // console.log(email.value)
+  // const { role } = useContext(UserContext);
+  // console.log(role);
 
   useEffect(() => {
     // uses the react life cycle to update the page's state or context,
@@ -44,9 +51,8 @@ function App() {
   return (
     <Router>
       <React.Fragment>
-        <UserContext.Provider
-          value={{ email, setEmail, loggedIn, setLoggedIn }}
-        >
+      <UserContext.Provider value={{ email, setEmail, loggedIn, setLoggedIn, role}}>
+          {console.log("Role of User logged in: " + JSON.stringify(role))}
           <div>
             <Navbar />
             <Switch>
@@ -69,6 +75,9 @@ function App() {
               <Route exact path="/logout">
                 <Logout />
               </Route>
+              <Route exact path="/driver">
+                  <DriversScreen />
+                </Route>
               {/* <Route exact path="/checkoutTest">
                   <CheckoutModalBody />
                 </Route> */}
@@ -76,6 +85,7 @@ function App() {
             {/* kyle added 47-48 and 51*/}
           </div>
         </UserContext.Provider>
+ 
       </React.Fragment>
     </Router>
   );

@@ -5,10 +5,11 @@ import UserContext from '../../utils/UserContext';
 import { useHistory } from "react-router-dom";
 
 function LoginForm(props) {
-    const { email, setEmail, loggedIn, setLoggedIn } = useContext(UserContext);
+    const { email, setEmail, loggedIn, setLoggedIn, role, setRole } = useContext(UserContext);
     const history = useHistory();
     const emailInput = useRef();
     const passwordInput = useRef();
+    const roleInput = useRef();
     let extraProps = {}
     if (props.className) {
         extraProps.className = props.className;
@@ -21,11 +22,14 @@ function LoginForm(props) {
         event.preventDefault();
         // console.log("submit happened");
         // console.log({ email: emailInput.current.value, password: passwordInput.current.value});
+        // {console.log("HERE: " + JSON.stringify(roleInput.value))}
         API.login({ email: emailInput.current.value, password: passwordInput.current.value})
             .then(data => {
                 // console.log(data);
                 setEmail(data.data.email);
+                // setRole(data.data.role);
                 setLoggedIn(true);
+                // setRole("Driver");
                 history.push("/");
             })
             .catch(err => {
