@@ -5,6 +5,8 @@ import UserContext from '../utils/UserContext';
 
 function Login(props){
     const {loggedIn} = useContext(UserContext);
+    console.log("user-context");
+    console.log(UserContext);
     return (
         <div className="container">
             {loggedIn && <Redirect to="/" />}

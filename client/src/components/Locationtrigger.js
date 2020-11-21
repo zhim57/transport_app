@@ -21,3 +21,6 @@ const GeoTrigger =(props) =>{
 }
 
 export default GeoTrigger;
+
+
+//

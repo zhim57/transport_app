@@ -72,6 +72,7 @@ function SignUpForm(props) {
 
 
     }
+    
     return (
         <Fragment>
             { (() => {

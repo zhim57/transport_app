@@ -2,7 +2,7 @@ import React, { useState, Fragment, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../logo.png';
 import styled from 'styled-components';
-// import { ButtonContainer } from './Button';
+import { ButtonContainer } from './Button';
 import UserContext from "../utils/UserContext";
 import LoginForm from "../components/LoginForm";
 
@@ -67,15 +67,23 @@ function Navbar(props) {
         {/* </ButtonContainer> */}
       </Link>)}
 
-      {/* 
-        <Link to='/cart' className="ml-auto" >
+      
+      {(loggedIn) ?  (<Link to='/settask' className="button-right" >
                     <ButtonContainer>
                         <span className="mr-2">
                             <i className="fa fa-cart-plus" />
                         </span>
-                        My Cart
+                        New Job
                     </ButtonContainer>
-                </Link> */}
+                </Link>):null }
+      {(loggedIn) ?  (<Link to='/profile' className="button-right" >
+                    <ButtonContainer>
+                        <span className="mr-2">
+                            <i className="fa fa-cart-plus" />
+                        </span>
+                        Profile
+                    </ButtonContainer>
+                </Link>):null }
 
 
 

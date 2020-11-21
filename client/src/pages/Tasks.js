@@ -6,7 +6,7 @@ import { List, ListItem } from "../components/List";
 import API from '../utils/API';
 
 
-function Tasks() {
+function Tasks(props) {
     // Setting our component's initial state
     const [tasks, setTasks] = useState([]);
 
