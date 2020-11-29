@@ -38,15 +38,8 @@ function SignUpForm(props) {
     const handleSubmit = event => {
         // if the user hits enter or hits the button, this function will fire
         event.preventDefault();
-        // console.log("submit happened");
-        // console.log({ email: emailInput.current.value, password: passwordInput.current.value});
-        // API.testUserRouter()
-        // .then(data => {
-        //     console.log(data);
-        // })
-        // .catch(err => {
-        //     console.log(err);
-        // });
+        console.log(role);
+
         if(passwordVal.validate(passwordInput.current.value)){
             console.log('password is good')
             setpasswordGood(true);
@@ -55,12 +48,15 @@ function SignUpForm(props) {
            
             API.signup({ email: emailInput.current.value, password: passwordInput.current.value, name: nameInput.current.value, role: roleInput.current.value })
             .then(data => {
+                console.log("signup-data");
                 console.log(data);
+                console.log(data.data._id);
                 setEmail(data.data.email);
                 setLoggedIn(true);
                 setRole(data.data.role);
                 setpasswordGood(passwordInput.current.value);
                 console.log(passwordInput.current.value);
+                console.log("role"+ role +"logged in:" + loggedIn +"e mail"+ email);
             })
             .catch(err => {
                 console.log(err);
@@ -97,9 +93,10 @@ function SignUpForm(props) {
                         </div>
                         <div className="form-group">
                             <label htmlFor={roleId}>Role</label>
-                            <select className="form-control" ref={roleInput} type="text" id={roleId} size="2" >
-                                <option type="text" ref={roleInput} value="driver">Driver</option>
-                                <option type="text" ref={roleInput} value="customer">Customer</option>
+                            <select className="form-control"   ref={roleInput} type="text" id={roleId} size="3" >
+                                <option type="text"   value="driver">Driver</option>
+                                <option type="text"   value="customer">Customer</option>
+                                <option type="text"   value="dispatcher">Dispatcher</option>
                             </select>
                             
                         </div>

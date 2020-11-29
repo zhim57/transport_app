@@ -23,6 +23,10 @@ export default {
     login: function(userData){
       return axios.post("/api/user/login", userData);
     },
+    update: function(id, userData){
+  
+      return axios.put("/api/user/update/"+ id, userData);
+    },
     logout: function(){
       return axios.get("/api/user/logout");
     },

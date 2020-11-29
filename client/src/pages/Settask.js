@@ -1,19 +1,19 @@
-import React, { Fragment,  useRef, useState } from "react"; // Fragment,
+import React, { Fragment,  useRef, useState, useContext } from "react"; // Fragment,
 import {Redirect} from 'react-router-dom';
 // import tasksController from '../controllers/tasksController';
 // import "./style.scss";
 import API from "../utils/API";
-// import UserContext from '../utils/UserContext';
+import UserContext from '../utils/UserContext';
 
 const Settask = function (props) {
   
   //====================
   
-  // const { email, setEmail, loggedIn, setLoggedIn } = useContext(UserContext);
+  const { email, setEmail, loggedIn, setLoggedIn, role } = useContext(UserContext);
   const [tasks1, setTasks1] = useState([]);
   const [redirectToReferrer, setRedirectToReferrer] = useState(false);
 
-  console.log(tasks1);
+  // console.log(tasks1);
   const clientEmailInput = useRef();
   const taskStartPointInput = useRef();
   const taskEndPointInput = useRef();
@@ -79,35 +79,7 @@ const Settask = function (props) {
       .then((res) => setTasks1(res.data))
       .then(console.log(tasks1))
       .catch((err) => console.log(err));
-    console.log("submit happened");
-
     
-   
-    // console.log({ email: emailInput.current.value, password: passwordInput.current.value});
-    // API.testUserRouter()
-    // .then(data => {
-    //     console.log(data);
-    // })
-    // .catch(err => {
-    //     console.log(err);
-    // });
-
-    // taskStartPoint v
-    // taskEndPoint v
-    // timeTargetTime v
-    // clientNameLast v
-    // clientNameFirst v
-    // clientEmail v
-    // peopleCount v
-    // vesselName v
-
-    // description = "transport"
-    // taskNumber = automatic
-    // clientImage =  "clientImage.jpg"
-    // driverImage = assigned later
-    // vehicleImage =assigned later
-    // driverName= assigned later
-    // vehiclePlate = assigned later
   
 
     API.saveTasks({
@@ -134,20 +106,20 @@ const Settask = function (props) {
         setRedirectToReferrer(true);
         // setLoggedIn(true);
         // window.location.reload();
-     
+      
+        props.refreshTasks(tasks1);
+        
       })
       .catch((err) => {
-        console.log("some error");
+        // console.log("some error");
         console.log("set task  failed  ");
       });
   };
-
+  const redirect_path = role ==="driver"?"/driver":"/client" 
   //======================
 
   return (
-    <Fragment>{
-        console.log(redirectToReferrer)}
-                    redirectToReferrer
+    <Fragment> 
       {
       (() => {
         if (redirectToReferrer === false) {
@@ -288,9 +260,9 @@ const Settask = function (props) {
         } else {
           return ( 
               <div>
-
-                  {console.log("redirecting")}
-                  <Redirect to="/" />
+               
+            <Redirect to={redirect_path}/>
+                   
               </div>
                   );
         }

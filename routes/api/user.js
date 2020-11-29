@@ -1,13 +1,19 @@
 const router = require("express").Router();
+const mongoose = require('mongoose');
 // Requiring our models and passport as we've configured it
 const db = require("../../models");
 const passport = require("../../config/passport");
+// const userController = require("../../controllers/userController_old");
 
 // -> /api/user/test
 router.get("/test", (req, res) => {
     res.json(true);
 });
 
+// router
+//   .route("/profileUpdate :id")
+//    .put(userController.update)
+//    .delete(userController.remove);
 
 
 // Using the passport.authenticate middleware with our local strategy.
@@ -39,6 +45,30 @@ router.post("/signup", (req, res) => {
             email: data.email,
             role: data.role
         });
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(401).json(err);
+    });
+});
+
+router.put("/update/:id", ( req,res) => {
+    console.log(req.body, "params ", req.params.id);
+      db.User.findOneAndUpdate({_id:mongoose.Types.ObjectId(req.params.id)},{ $set: {
+        nameFirst: req.body.nameFirst,
+        role: req.body.role,
+        nameLast: req.body.nameLast,
+        vesselName: req.body.vesselName,
+        position: req.body.position,
+        profilePicture: req.body.profilePicture,
+        vesselEmail: req.body.vesselEmail,
+        phoneNumber: req.body.phoneNumber     
+    }},{
+        new: true
+      }).then(data => {
+        console.log("data");
+        console.log(data);
+        res.json({data});
     })
     .catch(err => {
         console.log(err);

@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
-// kyle added 4-5
 const bcrypt = require("bcryptjs");
 const SALT_WORK_FACTOR = 10;
 
@@ -8,18 +7,19 @@ const userSchema = new Schema(
     {
         name: { type: String, required: true, unique: true },
         email: { type: String, required: true, unique: true },
-        // kyle added 12
         password: { type: String, required: true },
         date: { type: Date, default: Date.now },
         role:{ type: String, required: true },
         nameFirst:{ type: String, required: false },
         nameLast:{ type: String, required: false },
         vesselName:{ type: String, required: false },
+        vesselEmail:{ type: String, required: false },
         position:{ type: String, required: false },
+        phoneNumber: {type: Number, required: false},
         profilePicture:{type: String, required: false }
     }  
 );
-// kyle added 17-40
+
 userSchema.pre('save', function(next) {
     var user = this;
 

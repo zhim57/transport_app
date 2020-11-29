@@ -14,10 +14,11 @@ function TaskList(props) {
 
        API.deleteTasks(id);
        console.log("task deleted");
-       window.location.reload();
+       setTimeout(() => props.refreshTasks(), 500);
+       
    }
   return (
-    <div className="py-5">
+    <div className="py-5  ui">
       <div className="container-tasks">
         <Title name="Current" title="transport jobs" />
         {/* <div className="row-tasks"> */}
