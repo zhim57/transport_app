@@ -5,10 +5,10 @@ const tasksSchema = new Schema(
     {
         taskStartPoint: { type: String, required: true, unique: false },
         taskEndPoint: { type: String, required: true, unique: false },
-        timeCreated: { type: Date, default: Date.now },
+        timeCreated: { type: String, required: false  },
         timeTargetTime: { type: String, required: true },
-        timeActual: { type: Date, default: Date.now },
-        timeCompleted: { type: Date, default: Date.now },
+        timeActual: { type: String, required: false },
+        timeCompleted: { type: String, required: false },
        
         driverName: { type: String, required: false },
         vehiclePlate: { type: String, required: false },
@@ -28,7 +28,8 @@ const tasksSchema = new Schema(
         started: { type: Boolean, default: false },
         aborted: { type: Boolean, default: false },
         reasonAborted: String,
-        completed: { type: Boolean, default: false }
+        completed: { type: Boolean, default: false },
+        remarks:{type: String, required: false}
         
     }
 

@@ -5,6 +5,14 @@ import UserContext from '../../utils/UserContext';
 import passwordValidator from "password-validator";
 
 function SignUpForm(props) {
+// console.log("residual data ")
+// console.log(email)
+// console.log(loggedIn)
+
+// console.log("residual data ")
+// console.log("residual data ")
+
+
     const { email, setEmail, loggedIn, setLoggedIn, role, setRole } = useContext(UserContext);
     const emailInput = useRef();
     const passwordInput = useRef();

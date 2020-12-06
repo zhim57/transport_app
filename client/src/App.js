@@ -7,12 +7,14 @@ import Login from "./pages/Login";
 import UserContext from "./utils/UserContext";
 import Logout from "./pages/Logout";
 import SignUp from "./pages/SignUp";
-import TaskList from "./components/TaskList";
+// import TaskList from "./components/TaskList";
 import Tasks from "./pages/Tasks";
 import Profile from "./pages/Profile";
 import Settask from "./pages/Settask";
 import API from "./utils/API";
 import DriversScreen from "./components/driversScreen";
+import ClientScreen from "./components/clientScreen";
+
 
 function App() {
   const [email, setEmail] = useState("");
@@ -28,36 +30,36 @@ function App() {
   const [phoneNumber,setPhoneNumber]= useState("");
  
   var updateUserContextData = (userContextData) => {
-    // setEmail(userContextData.email);
-    // console.log("userContextData.email");
-    // console.log(userContextData.email);
+    setEmail(userContextData.email);
+    console.log("userContextData.email");
+    console.log(userContextData.email);
     // setLoggedIn(userContextData.loggedIn);
-    // console.log("userContextData.loggedin");
-    // console.log(userContextData.loggedin);
+    console.log("userContextData.loggedin");
+    console.log(userContextData.loggedIn);
     setRole(userContextData.role);
     setUserId(userContextData.userId);
     setNameFirst(userContextData.nameFirst);
     setNameLast(userContextData.nameLast);
     setVesselName(userContextData.vesselName);
     setPosition(userContextData.position);
-    console.log("userContextData.role");
-    console.log(userContextData.role);
+    // console.log("userContextData.role");
+    // console.log(userContextData.role);
     setUserId(userContextData.userId);
     setProfilePicture(userContextData.profilePicture);
     setVesselEmail(userContextData.vesselEmail);
     setPhoneNumber(userContextData.phoneNumber);
-    console.log("userContextData.userId");
-    console.log(userContextData.userId);
+    // console.log("userContextData.userId");
+    // console.log(userContextData.userId);
   };
-  console.log("user-context");
-  console.log(UserContext._currentValue);
+  // console.log("user-context");
+  // console.log(UserContext._currentValue);
 
   const [tasks, setTasks] = useState([]);
 
-  useEffect(() => {
-    // uses the react life cycle to update the page's state or context,
-    // with global context it updates the entire app
-  }, []);
+  // useEffect(() => {
+  //   // uses the react life cycle to update the page's state or context,
+  //   // with global context it updates the entire app
+  // }, []);
   // Setting our component's initial state
 
   // Load all products and store them with setProducts
@@ -98,9 +100,11 @@ function App() {
             updateUserContextData,
           }}
         >
-          {console.log("Role of User logged in: " + JSON.stringify(role))}
+          {/* {console.log("Role of User logged in: " + JSON.stringify(role))} */}
           <div>
-            <Navbar />
+            <Navbar>
+             
+              </Navbar> 
             <Switch>
               <Route exact path="/tasks" component={Tasks} />
               <Route exact path="/profile" component={Profile}>
@@ -111,7 +115,8 @@ function App() {
                 <Settask tasks={tasks} refreshTasks={refreshTasks} />
               </Route>
               <Route exact path="/">
-                <TaskList tasks={tasks} refreshTasks={refreshTasks} />
+              <Login />
+                {/* <TaskList tasks={tasks} refreshTasks={refreshTasks} /> */}
               </Route>
 
               <Route exact path="/login">
@@ -125,6 +130,9 @@ function App() {
               </Route>
               <Route exact path="/driver">
                 <DriversScreen />
+              </Route>
+              <Route exact path="/client">
+                <ClientScreen />
               </Route>
               {/* <Route exact path="/checkoutTest">
                   <CheckoutModalBody />

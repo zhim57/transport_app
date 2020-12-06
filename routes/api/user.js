@@ -22,10 +22,20 @@ router.get("/test", (req, res) => {
 // -> /api/user/login
 router.post("/login", passport.authenticate("local"), (req, res) => {
     // Sending back a password, even a hashed password, isn't a good idea
+    // console.log("all infor returned at log in")
+    // console.log(res)
     res.json({
         email: req.user.email,
         _id: req.user._id,
-        role: req.user.role
+        role: req.user.role,
+        nameFirst:req.user.nameFirst,
+        nameLast:req.user.nameLast,
+        phoneNumber:req.user.phoneNumber,
+        position:req.user.position,
+        profilePicture:req.user.profilePicture,
+        vesselName:req.user.vesselName,
+        vesselEmail:req.user.vesselEmail
+       
     });
 });
 
@@ -33,7 +43,7 @@ router.post("/login", passport.authenticate("local"), (req, res) => {
 // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
 // otherwise send back an error
 router.post("/signup", (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     db.User.create({
         email: req.body.email,
         password: req.body.password,
@@ -53,21 +63,34 @@ router.post("/signup", (req, res) => {
 });
 
 router.put("/update/:id", ( req,res) => {
-    console.log(req.body, "params ", req.params.id);
+    // console.log(req.body, "params ", req.params.id);
       db.User.findOneAndUpdate({_id:mongoose.Types.ObjectId(req.params.id)},{ $set: {
         nameFirst: req.body.nameFirst,
-        role: req.body.role,
+        // role: req.body.role,
         nameLast: req.body.nameLast,
         vesselName: req.body.vesselName,
         position: req.body.position,
-        profilePicture: req.body.profilePicture,
+       
         vesselEmail: req.body.vesselEmail,
         phoneNumber: req.body.phoneNumber     
-    }},{
-        new: true
-      }).then(data => {
-        console.log("data");
-        console.log(data);
+    }}).then(data => {    //,{new: true}
+        // console.log("data");
+        // console.log(data);
+        res.json({data});
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(401).json(err);
+    });
+});
+router.put("/update1/:id", ( req,res) => {
+    // console.log(req.body, "params ", req.params.id);
+      db.User.findOneAndUpdate({_id:mongoose.Types.ObjectId(req.params.id)},{ $set: {
+        profilePicture: req.body.profilePicture
+           
+    }}).then(data => {    //,{new: true}
+        // console.log("data");
+        // console.log(data);
         res.json({data});
     })
     .catch(err => {

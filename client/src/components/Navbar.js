@@ -5,12 +5,14 @@ import styled from 'styled-components';
 import { ButtonContainer } from './Button';
 import UserContext from "../utils/UserContext";
 import LoginForm from "../components/LoginForm";
+import Timer from "./Timer";
 
 function Navbar(props) {
 
   // kyle added 11-12
   const [loginExpanded, setLoginExpanded] = useState(false);
   const { email, loggedIn, role } = useContext(UserContext);
+
   return (
     <NavWrapper className="navbar navbar-expand-sm navbar-dark px-sm-5 row-tasks">
 
@@ -66,14 +68,15 @@ function Navbar(props) {
                 Sign Up
         {/* </ButtonContainer> */}
       </Link>)}
+      <Timer />
 
       
       {(loggedIn) ?  (<Link to='/settask' className="button-right" >
                     <ButtonContainer>
                         <span className="mr-2">
-                            <i className="fa fa-cart-plus" />
+                            <i className="" />
                         </span>
-                        New Job
+                        Request Pick-up
                     </ButtonContainer>
                 </Link>):null }
       {(loggedIn) ?  (<Link to='/profile' className="button-right" >

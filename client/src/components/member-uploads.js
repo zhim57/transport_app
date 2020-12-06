@@ -1,30 +1,45 @@
-import React from 'react'
+import React from "react";
+import API from "../utils/API";
 
-function MemberUploads (props)  {
 
-API.get("/api/user/data").then(cloudData => {
-  var myWidget = cloudinary.createUploadWidget({
-    cloudName: cloudData.cloudUploadName,
-    uploadPreset: cloudData.cloudUploadPreset
-  
-  }, (error, result) => {   // my_preset
-    if (!error && result && result.event === "success") {
-      console.log('Done! Here is the image info: ', result.info);
-      var imageUrl = result.info.secure_url;
-      $.ajax({
-        url: "/api/user_data",
-        method: "PUT",
-        data: { profilePicture: imageUrl }
-      }).then(() => {
-        console.log("done!!!");
-        console.log(imageUrl);
-        document.getElementById('member_icon').attr("src", imageUrl);
-      })
+const MemberUploads = (props) => {
+ 
+  var myWidget = window.cloudinary.createUploadWidget({
+      // cloudName: cloudData.cloudUploadName,
+      // uploadPreset: cloudData.cloudUploadPreset,
+      cloudName: "dt6ie2v0k",
+      uploadPreset: "bloggdvc",
+    },
+    (error, result) => {
+      checkUploadResult(result);
     }
-  })
-  document.getElementById("upload_widget").addEventListener("click", function () {
+  );
+  
+
+  const checkUploadResult = (resultEvent) => {
+    if (resultEvent.event === "success") {
+      // console.log("props.currentUser.id");
+      // console.log(resultEvent.info.secure_url);
+     
+        let profilePictureData ={
+          profilePicture: resultEvent.info.secure_url
+        }
+        API.update1(props.id, profilePictureData)
+.then((res) => console.log("res.data"))
+.catch((err) => console.log(err));
+    }
+  };
+
+  const showWidget = (myWidget) => {
     myWidget.open();
-  }, false);
-});
+  };
+  return (
+    <div id="photo-form-container">
+      <button className="button ui primary" onClick={( ()=> showWidget(myWidget))}>
+        submit picture
+      </button>
+    </div>
+    // document.getElementById('example')
+  );
 }
 export default MemberUploads;

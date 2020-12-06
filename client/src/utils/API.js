@@ -13,6 +13,12 @@ export default {
     deleteTasks: function(id) {
       return axios.delete("/api/tasks/" + id);
     },
+    completeTasks: function(id , taskData) {
+      return axios.put("/api/tasks/update/" + id , taskData);
+    },
+    abortTasks: function(id , taskData) {
+      return axios.put("/api/tasks/updatea/" + id , taskData);
+    },
     // Saves a tasks to the database
     saveTasks: function(tasksData) {
       return axios.post("/api/tasks", tasksData);
@@ -26,6 +32,10 @@ export default {
     update: function(id, userData){
   
       return axios.put("/api/user/update/"+ id, userData);
+    },
+    update1: function(id, userData){
+  
+      return axios.put("/api/user/update1/"+ id, userData);
     },
     logout: function(){
       return axios.get("/api/user/logout");
