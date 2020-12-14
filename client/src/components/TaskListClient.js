@@ -21,52 +21,69 @@ function TaskListClient(props) {
   // };
   return (
     <div className="py-5  ui">
-      <div className="container-tasks">
-        <Title name="Your" title="Pick ups" />
+      <Title name="Your" title="Pick ups" />
 
-        <div>
-          {/* <h4>
+      <center>
+      <table>
+        {/* <h4>
         | Pick up Location | destination | Pick up time | Plate # | People # | Driver's Avatar | Van's Image
       </h4> */}
-          {tasks.map((task) => (
-            <div key={task._id} className="row-tasks">
-              <h5>
-                From: {task.taskStartPoint} {"  "}
-                To: {task.taskEndPoint} {"  "}
-                At: {task.timeTargetTime} hrs {"  "}
-                Driver:{" "}
-                <img
-                  src={task.driverImage}
-                  alt={task.driverImage}
-                  className="row-image"
-                />{" "}
-                {/* {task.driverNameFirst}{" "} */}
-                {/* Veh Plate: {task.vehiclePlate} {" "} */}
-                Veh Pic:{" "}
+
+
+        <thead>
+          <tr>
+            <th>Pick Jivko up Location</th>
+            <th>destination</th>
+            <th>Pick up time </th>
+            <th>Driver's Avatar</th>
+            <th>Van's image </th>
+            <th>People # </th>
+            <th>tasks remarks </th>
+            <th>task Abort</th>
+          </tr>
+        </thead>
+        {tasks.map((task) => (
+          <tbody>
+            {/*  className="row-tasks" */}
+            <tr key={task._id}>
+              <td>
+                <h3>{task.taskStartPoint}</h3>{" "}
+              </td>
+              <td>
+                {" "}
+                <h3>{task.taskEndPoint}</h3>
+              </td>
+              <td>
+                <h3> {task.timeTargetTime}</h3>{" "}
+              </td>
+              <td>
+                <h3>
+                  <img
+                    src={task.driverImage}
+                    alt={task.driverImage}
+                    className="row-image"
+                  />
+                </h3>
+              </td>
+              <td>
                 <img
                   src={task.vehicleImage}
                   alt={task.vehicleImage}
                   className="row-image"
                 />{" "}
-                {"  "}
-                People: {task.peopleCount}
-                {"  "}
-                {task.remarks}
-                <button
+              </td>
+              <td> <h3> {task.peopleCount} </h3></td>
+              <td>{task.remarks} </td>
+              <td>
+                  <button
                   className="button ui danger"
                   data-id={task._id}
                   onClick={handleAbort}
                 >
                   Abort Task
                 </button>
-                {/* <button
-                  className="button ui primary"
-                  data-id={task._id}
-                  onClick={handleComplete}
-                >
-                  done
-                </button>
-              */}
+              </td>
+              <td>
                 {task.completed === true ? (
                   <p className="task-row" disabled data-task={task._id}>
                     placeholder text:{task.timeCompleted}
@@ -74,13 +91,13 @@ function TaskListClient(props) {
                 ) : (
                   <p></p>
                 )}
-              </h5>
-            </div>
-          ))}
-        </div>
-      </div>
+              </td>
+            </tr>
+          </tbody>
+        ))}
+      </table>
+      </center>
     </div>
-    // </div>
   );
 }
 

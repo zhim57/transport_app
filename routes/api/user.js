@@ -34,8 +34,10 @@ router.post("/login", passport.authenticate("local"), (req, res) => {
         position:req.user.position,
         profilePicture:req.user.profilePicture,
         vesselName:req.user.vesselName,
-        vesselEmail:req.user.vesselEmail
-       
+        vesselEmail:req.user.vesselEmail,
+        cloudUploadName: process.env.CLAUDINARY_CLOUDNAME,
+        cloudUploadPreset: process.env.CLAUDINARY_PRESET
+        
     });
 });
 
@@ -106,7 +108,7 @@ router.get("/logout", (req, res) => {
 });
 
 // Route for getting some data about our user to be used client side
-router.get("/data", (req, res) => {
+router.get("/data1", (req, res) => {
     if (!req.user) {
         // The user is not logged in, send back an empty object
         res.json({});
@@ -123,6 +125,8 @@ router.get("/data", (req, res) => {
             cloudUploadName: process.env.CLAUDINARY_CLOUDNAME,
             cloudUploadPreset: process.env.CLAUDINARY_PRESET
         });
+        console.log(process.env.CLAUDINARY_CLOUDNAME)
+        console.log(process.env.CLAUDINARY_PRESET)
     }
 });
 module.exports = router;

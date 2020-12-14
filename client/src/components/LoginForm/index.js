@@ -3,10 +3,111 @@ import "./style.scss";
 import API from "../../utils/API";
 import UserContext from "../../utils/UserContext";
 import { Redirect} from "react-router-dom";
+import axios from "axios";
+
+
 
 var value1 = { test: "test" };
+var mapImg="";
 
+var lat = "beggining value";
+var lon = "beggining value";
+var position = "beggining value";
 function LoginForm(props) {
+ 
+  //=====geolocation
+  let z = 12 ;       // Zoom level
+let latRad;
+let n
+let xTile
+let yTile
+
+  // var x = document.getElementById("demo");
+  function getLocation() {
+    
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      lat= "Geolocation is not supported by this browser.";
+    }
+  }
+ 
+
+  console.log("hi")
+    function showPosition(position) {
+      lat = position.coords.latitude ;
+      lon= position.coords.longitude}
+
+    // geoLoc = "Latitude: " + position.coords.latitude +
+    // "<br>Longitude: " + position.coords.longitude;
+  
+  getLocation() 
+  setTimeout(() => {
+
+    console.log( navigator.geolocation);
+    console.log(position);
+    console.log(lat);
+    console.log(lon);
+
+  }, 19800);
+  ///==== geolocation end
+  ///==== geolocation mapping 
+
+
+    // var latlon = position.coords.latitude + "," + position.coords.longitude;
+    var latlon = lat + "," + lon;
+    // var API_KEY= "AIzaSyCKC_nqKF96PC1beOCtWbEZtS2YUaqrYtI"
+    var API_KEYembedMap= "AIzaSyBghisw5q1SchKwdmZpQyTj3Mpugd73ACQ"
+    // AIzaSyBghisw5q1SchKwdmZpQyTj3Mpugd73ACQ
+    // AIzaSyBghisw5q1SchKwdmZpQyTj3Mpugd73ACQ
+  
+    // var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false&key="+ API_KEY;
+
+  //  var img_urlMap='<iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key='+ API_KEYembedMap + "&q="+latlon+"></iframe>"
+   var img_url_map1="https://www.google.com/maps/embed/v1/place?key="+ API_KEYembedMap + "&q="+ latlon ; // Space+Needle,Seattle+WA"
+  
+    // document.getElementById("mapholder").innerHTML = "<img src='"+img_url+"'>";
+// mapImg= "<img src='"+img_url+"'>";
+
+//-- javascript ---
+// var lat = 52.525439, // Latitude
+// lon = 13.38727,    // Longitude
+
+
+// latRad = lat * Math.PI / 180;
+// n = Math.pow(2, z);
+// xTile = n * ((lon + 180) / 360);
+// yTile = n * (1-(Math.log(Math.tan(latRad) + 1/Math.cos(latRad)) /Math.PI)) / 2;
+
+// //--- output ---
+// let lat_rad = 0.916
+// // n = 4096
+// console.log("xTile") //= 2200.31 // Column
+// console.log(xTile) //= 2200.31 // Column
+// console.log("yTile") //= 1343.20 // Row
+// console.log(yTile) //= 1343.20 // Row
+
+
+
+
+// const options = {
+//   method: 'GET',
+//   url: 'https://maptiles.p.rapidapi.com/local/osm/v1/12/'+ parseInt(xTile) +'/'+ parseInt(yTile)+'.png',
+//   headers: {
+//     'x-rapidapi-key': '6f4c62189fmshacee60036d76b2cp101a45jsn8679c155c21e',
+//     'x-rapidapi-host': 'maptiles.p.rapidapi.com'
+//   }
+// };
+
+// axios.request(options).then(function (response) {
+// 	console.log(response.data);
+// }).catch(function (error) {
+// 	console.error(error);
+// });
+
+  ///==== geolocation mapping end
+
+
   const consumerInfo = (value) => {
     value1 = value;
   };
@@ -14,7 +115,7 @@ function LoginForm(props) {
   const {
     email,
     setEmail,
-    loggedIn,
+    // loggedIn,
     setLoggedIn,
     role,
     updateUserContextData,
@@ -46,9 +147,6 @@ function LoginForm(props) {
       email: emailInput.current.value,
       password: passwordInput.current.value,
     }).then((data) => {
-      // console.log(" present user context data");
-      // console.log(data);
-      // console.log(" present user context data");
       userContextData = {
         userId: data.data._id,
         email: data.data.email,
@@ -59,37 +157,17 @@ function LoginForm(props) {
         vesselName: data.data.vesselName,
         vesselEmail: data.data.vesselEmail,
         position: data.data.position,
-        phoneNumber: data.data.phoneNumber
-                // loggedIn: true,
-        //   email: "dudur",
-        //   role: "sladur",
-        //   loggedIn: true,
-        //   userId: "petrov"
+        phoneNumber: data.data.phoneNumber,
+        cloudUploadName: data.data.cloudUploadName,
+        cloudUploadPreset: data.data.cloudUploadPreset
       };
       
       updateUserContextData(userContextData);
-      console.log(" present user context value");
-      console.log(value1);
-      console.log(" present user context value");
-
+ 
       setTimeout(() => consolesLogs(), 500);
       
       const consolesLogs = () => {
-        console.log("value1");
-  
-        
-        console.log(loggedIn);
-        console.log(value1);
-        // console.log(" printed out consumer info");
-        // console.log("email");
-        // console.log(value1.email);
-        // console.log("loggedIn");
-        // console.log(value1.loggedIn);
 
-        // console.log("role");
-        // console.log(value1.role);
-        // const text =
-        // console.log(value1.email + value1.role + value1.loggedIn);
       };
       // // console.log(data);
       setEmail(data.data.email);
@@ -134,26 +212,8 @@ function LoginForm(props) {
     }
 
 
-    // if(role==="driver"){
-    //     // console.log("history push: driver")
-    //     console.log(email, loggedIn, role);
-    //     history.push("/driver");
-    // }
-    //  else if(role==="customer"){
-    //         history.push("/client");
-
-    // }
-    // else{
-    //   console.log(email, loggedIn, role);
-    //     history.push("/");
-    // }
-
-    //       })
-    //       .catch((err) => {
-    //         console.log(err);
-    //       });
-
     return (
+      
       <Fragment>
                   <UserContext.Consumer>
                     {(value) => consumerInfo(value)}
@@ -195,6 +255,13 @@ function LoginForm(props) {
           } else {
             return (
             <div>
+            <h1>geolocation : {lat} : {lon}</h1>
+            {/* {mapImg} */}
+            {/* {img_urlMap} */}
+            <div>
+            <iframe title="map1" width="600" height="450" frameBorder="0" style={{border:0}} src={img_url_map1}></iframe>
+            </div>
+          
                   <UserContext.Consumer>
                     {(value) => consumerInfo(value)}
                   </UserContext.Consumer>

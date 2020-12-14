@@ -47,6 +47,6 @@ export default {
       return axios.get("/api/user/data");
     },
     getUserData: function() {
-        return axios.get("/api/user/data");
+        return axios.get("/api/user/data1");
       }
   };

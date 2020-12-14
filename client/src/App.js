@@ -14,28 +14,30 @@ import Settask from "./pages/Settask";
 import API from "./utils/API";
 import DriversScreen from "./components/driversScreen";
 import ClientScreen from "./components/clientScreen";
-
+import DispatcherScreen from "./components/dispatcherScreen";
 
 function App() {
   const [email, setEmail] = useState("");
   const [userId, setUserId] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [role, setRole] = useState("");
-  const [nameFirst, setNameFirst]= useState("");
-  const [nameLast, setNameLast]= useState("");
-  const [vesselName,setVesselName]= useState("");
-  const [position,setPosition]= useState("");
-  const [profilePicture,setProfilePicture]= useState("");
-  const [vesselEmail,setVesselEmail]= useState("");
-  const [phoneNumber,setPhoneNumber]= useState("");
- 
+  const [nameFirst, setNameFirst] = useState("");
+  const [nameLast, setNameLast] = useState("");
+  const [vesselName, setVesselName] = useState("");
+  const [position, setPosition] = useState("");
+  const [profilePicture, setProfilePicture] = useState("");
+  const [vesselEmail, setVesselEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [cloudUploadName, setCloudUploadName] = useState("");
+  const [cloudUploadPreset, setCloudUploadPreset] = useState("");
+
   var updateUserContextData = (userContextData) => {
     setEmail(userContextData.email);
-    console.log("userContextData.email");
-    console.log(userContextData.email);
-    // setLoggedIn(userContextData.loggedIn);
-    console.log("userContextData.loggedin");
-    console.log(userContextData.loggedIn);
+    // console.log("userContextData.email");
+    // console.log(userContextData.email);
+    // // setLoggedIn(userContextData.loggedIn);
+    // console.log("userContextData.loggedin");
+    // console.log(userContextData.loggedIn);
     setRole(userContextData.role);
     setUserId(userContextData.userId);
     setNameFirst(userContextData.nameFirst);
@@ -50,6 +52,11 @@ function App() {
     setPhoneNumber(userContextData.phoneNumber);
     // console.log("userContextData.userId");
     // console.log(userContextData.userId);
+    setCloudUploadName(userContextData.cloudUploadName);
+    setCloudUploadPreset(userContextData.cloudUploadPreset);
+
+
+
   };
   // console.log("user-context");
   // console.log(UserContext._currentValue);
@@ -98,13 +105,13 @@ function App() {
             vesselEmail,
             phoneNumber,
             updateUserContextData,
+            cloudUploadPreset,
+            cloudUploadName
           }}
         >
           {/* {console.log("Role of User logged in: " + JSON.stringify(role))} */}
           <div>
-            <Navbar>
-             
-              </Navbar> 
+            <Navbar></Navbar>
             <Switch>
               <Route exact path="/tasks" component={Tasks} />
               <Route exact path="/profile" component={Profile}>
@@ -115,7 +122,7 @@ function App() {
                 <Settask tasks={tasks} refreshTasks={refreshTasks} />
               </Route>
               <Route exact path="/">
-              <Login />
+                <Login />
                 {/* <TaskList tasks={tasks} refreshTasks={refreshTasks} /> */}
               </Route>
 
@@ -134,11 +141,10 @@ function App() {
               <Route exact path="/client">
                 <ClientScreen />
               </Route>
-              {/* <Route exact path="/checkoutTest">
-                  <CheckoutModalBody />
-                </Route> */}
+              <Route exact path="/dispatcher">
+                <DispatcherScreen />
+              </Route>
             </Switch>
-            {/* kyle added 47-48 and 51*/}
           </div>
         </UserContext.Provider>
       </React.Fragment>

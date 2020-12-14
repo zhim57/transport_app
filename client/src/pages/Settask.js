@@ -98,28 +98,28 @@ const Settask = function (props) {
 
     API.getTasks()
       .then((res) => setTasks1(res.data))
-      .then(console.log(tasks1))
+      // .then(console.log(tasks1))
       .catch((err) => console.log(err));
 
-    console.log("already available values");
-    console.log(
-      userId,
-      email,
-      role,
-      nameFirst,
-      nameLast,
-      vesselName,
-      position,
-      profilePicture,
-      vesselEmail,
-      phoneNumber
-    );
+    // console.log("already available values");
+    // console.log(
+    //   userId,
+    //   email,
+    //   role,
+    //   nameFirst,
+    //   nameLast,
+    //   vesselName,
+    //   position,
+    //   profilePicture,
+    //   vesselEmail,
+    //   phoneNumber
+    // );
 let dateNow =new Date(Date.now());
 let dateNowLocal= dateNow.toLocaleString();
-console.log("dateNow")
-console.log(dateNow)
-console.log("dateNowLocal")
-console.log(dateNowLocal)
+// console.log("dateNow")
+// console.log(dateNow)
+// console.log("dateNowLocal")
+// console.log(dateNowLocal)
 
     API.saveTasks({
       // clientEmail: clientEmailInput.current.value,
@@ -150,7 +150,7 @@ console.log(dateNowLocal)
       vesselEmail: vesselEmail,
     })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
 
         setRedirectToReferrer(true);
         // setLoggedIn(true);
@@ -166,9 +166,9 @@ console.log(dateNowLocal)
   let redirect_path = "";
   if (role){
 
-    console.log("role");
+    // console.log("role");
   
-    console.log(role);
+    // console.log(role);
       switch (role) {
         case "customer":
           console.log("customer");
