@@ -30,6 +30,7 @@ function App() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [cloudUploadName, setCloudUploadName] = useState("");
   const [cloudUploadPreset, setCloudUploadPreset] = useState("");
+  const [API_KEYembedMap, setAPI_KEYembedMap] = useState("");
 
   var updateUserContextData = (userContextData) => {
     setEmail(userContextData.email);
@@ -54,6 +55,7 @@ function App() {
     // console.log(userContextData.userId);
     setCloudUploadName(userContextData.cloudUploadName);
     setCloudUploadPreset(userContextData.cloudUploadPreset);
+    setAPI_KEYembedMap(userContextData.API_KEYembedMap);
 
 
 
@@ -106,7 +108,8 @@ function App() {
             phoneNumber,
             updateUserContextData,
             cloudUploadPreset,
-            cloudUploadName
+            cloudUploadName,
+            API_KEYembedMap
           }}
         >
           {/* {console.log("Role of User logged in: " + JSON.stringify(role))} */}

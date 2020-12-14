@@ -14,6 +14,15 @@ var lat = "beggining value";
 var lon = "beggining value";
 var position = "beggining value";
 function LoginForm(props) {
+  const {
+    email,
+    setEmail,
+    // loggedIn,
+    setLoggedIn,
+    role,
+    updateUserContextData,
+    API_KEYembedMap
+  } = useContext(UserContext);
  
   //=====geolocation
   let z = 12 ;       // Zoom level
@@ -111,14 +120,7 @@ let yTile
     value1 = value;
   };
   var userContextData = {};
-  const {
-    email,
-    setEmail,
-    // loggedIn,
-    setLoggedIn,
-    role,
-    updateUserContextData,
-  } = useContext(UserContext);
+  
   // const history = useHistory();
   const emailInput = useRef();
   const passwordInput = useRef();
@@ -158,7 +160,8 @@ let yTile
         position: data.data.position,
         phoneNumber: data.data.phoneNumber,
         cloudUploadName: data.data.cloudUploadName,
-        cloudUploadPreset: data.data.cloudUploadPreset
+        cloudUploadPreset: data.data.cloudUploadPreset,
+        API_KEYembedMap: data.data.API_KEYembedMap
       };
       
       updateUserContextData(userContextData);

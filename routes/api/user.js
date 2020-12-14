@@ -36,7 +36,8 @@ router.post("/login", passport.authenticate("local"), (req, res) => {
         vesselName:req.user.vesselName,
         vesselEmail:req.user.vesselEmail,
         cloudUploadName: process.env.CLAUDINARY_CLOUDNAME,
-        cloudUploadPreset: process.env.CLAUDINARY_PRESET
+        cloudUploadPreset: process.env.CLAUDINARY_PRESET,
+        API_KEYembedMap: process.env.API_KEY_EMBED_MAP
         
     });
 });
