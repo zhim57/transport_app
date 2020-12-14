@@ -56,10 +56,9 @@ let yTile
 
     // var latlon = position.coords.latitude + "," + position.coords.longitude;
     var latlon = lat + "," + lon;
-    // var API_KEY= "AIzaSyCKC_nqKF96PC1beOCtWbEZtS2YUaqrYtI"
-    var API_KEYembedMap= "AIzaSyBghisw5q1SchKwdmZpQyTj3Mpugd73ACQ"
-    // AIzaSyBghisw5q1SchKwdmZpQyTj3Mpugd73ACQ
-    // AIzaSyBghisw5q1SchKwdmZpQyTj3Mpugd73ACQ
+
+    // var API_KEYembedMap
+  
   
     // var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false&key="+ API_KEY;
 

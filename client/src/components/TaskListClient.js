@@ -32,14 +32,14 @@ function TaskListClient(props) {
 
         <thead>
           <tr>
-            <th>Pick Jivko up Location</th>
-            <th>destination</th>
-            <th>Pick up time </th>
-            <th>Driver's Avatar</th>
-            <th>Van's image </th>
-            <th>People # </th>
-            <th>tasks remarks </th>
-            <th>task Abort</th>
+            <th align="center">Pick up Location</th>
+            <th align="center">Destination</th>
+            <th align="center">Pick up time </th>
+            <th align="center">Driver's Avatar</th>
+            <th align="center">Van's image </th>
+            <th align="center">People # </th>
+            <th align="center">tasks remarks </th>
+            <th align="center">task Abort</th>
           </tr>
         </thead>
         {tasks.map((task) => (
@@ -47,23 +47,23 @@ function TaskListClient(props) {
             {/*  className="row-tasks" */}
             <tr key={task._id}>
               <td>
-                <h3>{task.taskStartPoint}</h3>{" "}
+                <h5>{task.taskStartPoint}</h5>{" "}
               </td>
               <td>
                 {" "}
-                <h3>{task.taskEndPoint}</h3>
+                <h5>{task.taskEndPoint}</h5>
               </td>
               <td>
-                <h3> {task.timeTargetTime}</h3>{" "}
+                <h5> {task.timeTargetTime}</h5>
               </td>
               <td>
-                <h3>
+                <h5>
                   <img
                     src={task.driverImage}
                     alt={task.driverImage}
                     className="row-image"
                   />
-                </h3>
+                </h5>
               </td>
               <td>
                 <img
@@ -72,7 +72,7 @@ function TaskListClient(props) {
                   className="row-image"
                 />{" "}
               </td>
-              <td> <h3> {task.peopleCount} </h3></td>
+              <td> <h5> {task.peopleCount} </h5></td>
               <td>{task.remarks} </td>
               <td>
                   <button
