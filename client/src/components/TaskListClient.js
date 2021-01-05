@@ -24,7 +24,8 @@ function TaskListClient(props) {
       <Title name="Your" title="Pick ups" />
 
       <center>
-      <table>
+      <table cellSpacing="200">
+      
         {/* <h4>
         | Pick up Location | destination | Pick up time | Plate # | People # | Driver's Avatar | Van's Image
       </h4> */}
@@ -42,9 +43,9 @@ function TaskListClient(props) {
             <th align="center">task Abort</th>
           </tr>
         </thead>
-        {tasks.map((task) => (
           <tbody>
-            {/*  className="row-tasks" */}
+        {tasks.map((task) => (
+            
             <tr key={task._id}>
               <td>
                 <h5>{task.taskStartPoint}</h5>{" "}
@@ -93,8 +94,8 @@ function TaskListClient(props) {
                 )}
               </td>
             </tr>
-          </tbody>
         ))}
+        </tbody>
       </table>
       </center>
     </div>

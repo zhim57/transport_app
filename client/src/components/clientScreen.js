@@ -34,6 +34,7 @@ function ClientScreen() {
 useEffect(() => {
     if (value1.email){
   loadTasks();
+  // refreshTasks();
     }
 },[] );
 
