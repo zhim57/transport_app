@@ -57,6 +57,15 @@ const LocationSelector = () => {
             pickupName: 'Global Bayonne -visitor gate',
             location: {lat: 40.67611442693582, lng: -74.08839520362037}
         },
+        {
+            userZone: 'teast Site1',
+            corner1: {lat: 40.52996083764932,  lng: -74.48108633551196},
+            corner2: {lat: 40.53010762075818, lng: -74.48078056369722},
+            corner3: {lat: 40.52972027574792,  lng: -74.48090930972448},
+            corner4: {lat: 40.529846672786825,  lng: -74.48061158453646},
+            pickupName: 'Test Site1 -visitor gate',
+            location: {lat: 40.52986705938368,  lng: -74.48074569498152}
+        },
     ]
     const [state, setState] =useState({
         loaded:false,
