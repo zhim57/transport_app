@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import UserContext from "./utils/UserContext";
 import Logout from "./pages/Logout";
 import SignUp from "./pages/SignUp";
+import LocationSelector from "./pages/LocationSelector";
 // import TaskList from "./components/TaskList";
 import Tasks from "./pages/Tasks";
 import Profile from "./pages/Profile";
@@ -117,6 +118,7 @@ function App() {
             <Navbar></Navbar>
             <Switch>
               <Route exact path="/tasks" component={Tasks} />
+              <Route exact path="/location" component={LocationSelector} />
               <Route exact path="/profile" component={Profile}>
                 <Profile></Profile>
               </Route>
