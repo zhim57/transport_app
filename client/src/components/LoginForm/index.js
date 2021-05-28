@@ -3,12 +3,12 @@ import "./style.scss";
 import API from "../../utils/API";
 import UserContext from "../../utils/UserContext";
 import { Redirect} from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 
 
 
 var value1 = { test: "test" };
-var mapImg="";
+// var mapImg="";
 
 var lat = "beggining value";
 var lon = "beggining value";
@@ -25,11 +25,7 @@ function LoginForm(props) {
   } = useContext(UserContext);
  
   //=====geolocation
-  let z = 12 ;       // Zoom level
-let latRad;
-let n
-let xTile
-let yTile
+
 
   // var x = document.getElementById("demo");
   function getLocation() {
