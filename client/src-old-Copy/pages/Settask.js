@@ -1,30 +1,19 @@
-import React, { Fragment, useRef, useState, useContext } from "react"; // Fragment,
-import { Redirect } from "react-router-dom";
+import React, { Fragment,  useRef, useState } from "react"; // Fragment,
+import {Redirect} from 'react-router-dom';
 // import tasksController from '../controllers/tasksController';
 // import "./style.scss";
 import API from "../utils/API";
-import UserContext from "../utils/UserContext";
+// import UserContext from '../utils/UserContext';
 
 const Settask = function (props) {
+  
   //====================
-
-  const {
-    userId,
-    email,
-    role,
-    nameFirst,
-    nameLast,
-    vesselName,
-    position,
-    profilePicture,
-    vesselEmail,
-    phoneNumber,
-    //  updateUserContextData,
-  } = useContext(UserContext);
+  
+  // const { email, setEmail, loggedIn, setLoggedIn } = useContext(UserContext);
   const [tasks1, setTasks1] = useState([]);
   const [redirectToReferrer, setRedirectToReferrer] = useState(false);
 
-  // console.log(tasks1);
+  console.log(tasks1);
   const clientEmailInput = useRef();
   const taskStartPointInput = useRef();
   const taskEndPointInput = useRef();
@@ -59,25 +48,15 @@ const Settask = function (props) {
   let clientEmail = props.className
     ? props.className + "-clientEmail"
     : "clientEmail";
-
-  // let clientNameFirst = props.className
-  //   ? props.className + "-clientNameFirst"
-  //   : "clientNameFirst";
-  // let clientNameLast = props.className
-  //   ? props.className + "-clientNameLast"
-  //   : "clientNameLast";
-  // let clientEmail = props.className
-  //   ? props.className + "-clientEmail"
-  //   : "clientEmail";
-  //   let vesselName = props.className
-  //   ? props.className + "-vesselName"
-  //   : "vesselName";
-  //   let vesselEmail = props.className
-  //   ? props.className + "-vesselEmail"
-  //   : "vesselEmail";
   let peopleCount = props.className
     ? props.className + "-peopleCount"
     : "peopleCount";
+  let vesselName = props.className
+    ? props.className + "-vesselName"
+    : "vesselName";
+  let vesselEmail = props.className
+    ? props.className + "-vesselEmail"
+    : "vesselEmail";
 
   // let passwordId = props.className ? props.className + "-signup-password" : "signup-password";
   // let nameId = props.className ? props.className + "-signup-name" : "signup-name";
@@ -98,103 +77,79 @@ const Settask = function (props) {
 
     API.getTasks()
       .then((res) => setTasks1(res.data))
-      // .then(console.log(tasks1))
+      .then(console.log(tasks1))
       .catch((err) => console.log(err));
+    console.log("submit happened");
 
-    // console.log("already available values");
-    // console.log(
-    //   userId,
-    //   email,
-    //   role,
-    //   nameFirst,
-    //   nameLast,
-    //   vesselName,
-    //   position,
-    //   profilePicture,
-    //   vesselEmail,
-    //   phoneNumber
-    // );
-let dateNow =new Date(Date.now());
-let dateNowLocal= dateNow.toLocaleString();
-// console.log("dateNow")
-// console.log(dateNow)
-// console.log("dateNowLocal")
-// console.log(dateNowLocal)
+    
+   
+    // console.log({ email: emailInput.current.value, password: passwordInput.current.value});
+    // API.testUserRouter()
+    // .then(data => {
+    //     console.log(data);
+    // })
+    // .catch(err => {
+    //     console.log(err);
+    // });
+
+    // taskStartPoint v
+    // taskEndPoint v
+    // timeTargetTime v
+    // clientNameLast v
+    // clientNameFirst v
+    // clientEmail v
+    // peopleCount v
+    // vesselName v
+
+    // description = "transport"
+    // taskNumber = automatic
+    // clientImage =  "clientImage.jpg"
+    // driverImage = assigned later
+    // vehicleImage =assigned later
+    // driverName= assigned later
+    // vehiclePlate = assigned later
+  
 
     API.saveTasks({
-      // clientEmail: clientEmailInput.current.value,
-      // taskStartPoint: taskStartPointInput.current.value,
-      // taskEndPoint: taskEndPointInput.current.value,
-      // timeTargetTime: timeTargetTimeInput.current.value,
-      // timeCreated: dateNow,
-      // clientNameFirst: clientNameFirstInput.current.value,
-      // clientNameLast: clientNameLastInput.current.value,
-      // peopleCount: peopleCountInput.current.value,
-      // vesselName: vesselNameInput.current.value,
-      clientEmail: email,
+      clientEmail: clientEmailInput.current.value,
       taskStartPoint: taskStartPointInput.current.value,
       taskEndPoint: taskEndPointInput.current.value,
       timeTargetTime: timeTargetTimeInput.current.value,
-      timeCreated: dateNowLocal,
-      clientNameFirst: nameFirst,
-      clientNameLast: nameLast,
+      clientNameFirst: clientNameFirstInput.current.value,
+      clientNameLast: clientNameLastInput.current.value,
       peopleCount: peopleCountInput.current.value,
-      vesselName: vesselName,
+      vesselName: vesselNameInput.current.value,
       description: "Transport",
       taskNumber: tasks1.length - 1,
-      clientImage: profilePicture,
+      clientImage: "./clientImage1.jpg",
       driverImage: "./driverImage1.jpg",
       driverName: "Placeholder",
       vehicleImage: "./vanImage.png",
       vehiclePlate: "placeholder",
-      vesselEmail: vesselEmail,
+      vesselEmail: vesselEmailInput.current.value,
     })
       .then((data) => {
-        // console.log(data);
-
+        console.log(data);
+        
         setRedirectToReferrer(true);
         // setLoggedIn(true);
         // window.location.reload();
-
-        props.refreshTasks(tasks1);
+     
       })
       .catch((err) => {
-        // console.log("some error");
+        console.log("some error");
         console.log("set task  failed  ");
       });
   };
-  let redirect_path = "";
-  if (role){
 
-    // console.log("role");
-  
-    // console.log(role);
-      switch (role) {
-        case "customer":
-          console.log("customer");
-          redirect_path = "/client";
-  
-          break;
-        case "driver":
-          console.log("driver");
-          redirect_path = "/driver";
-          break;
-        case "dispatcher":
-          console.log("dispatcher");
-          redirect_path = "/dispatcher";
-  
-          break;
-        default:
-          redirect_path = "/login";
-          console.log(`Sorry, we are out of paths.`);
-         
-      }
-  }
   //======================
 
   return (
-    <Fragment>
-      {(() => {
+    <Fragment>{
+        console.log(redirectToReferrer)}
+                    redirectToReferrer
+      {
+      (() => {
         if (redirectToReferrer === false) {
           return (
             <div className="container">
@@ -309,7 +264,6 @@ let dateNowLocal= dateNow.toLocaleString();
                     className="form-control"
                     id={vesselName}
                   />
-                  <p>Request made by {userId} - {position}  - phone number: {phoneNumber}</p>
                 </div>
 
                 {/* <div className="form-group">
@@ -332,14 +286,16 @@ let dateNowLocal= dateNow.toLocaleString();
             </div>
           );
         } else {
-          return (
-            <div>
-              {/* <Redirect to="/client" /> */}
-              <Redirect to={redirect_path}/>
-            </div>
-          );
+          return ( 
+              <div>
+
+                  {console.log("redirecting")}
+                  <Redirect to="/" />
+              </div>
+                  );
         }
       })()}
+      
     </Fragment>
   );
 };
