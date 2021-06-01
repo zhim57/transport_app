@@ -4,9 +4,18 @@ import { Redirect } from "react-router-dom";
 // import "./style.scss";
 import API from "../utils/API";
 import UserContext from "../utils/UserContext";
+import LocationSelector from "./LocationSelector";
+import data from '../utils/data';
 
 const Settask = function (props) {
+    const [allzones, setAllZones] = useState(data)
+    const [selectedzone, setSelectedZone] = useState(null)
   //====================
+ const handleChange = (event) =>
+  {
+      const zone = data.find((data) => data.userZone === event.target.value);
+      setSelectedZone(zone);
+  }
 
   const {
     userId,
@@ -199,7 +208,6 @@ let dateNowLocal= dateNow.toLocaleString();
           return (
             <div className="container">
               <h1>Settask page</h1>
-
               <form {...extraProps} onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label htmlFor={taskStartPoint}>Pickup point</label>
@@ -208,20 +216,20 @@ let dateNowLocal= dateNow.toLocaleString();
                     ref={taskStartPointInput}
                     id={taskStartPoint}
                     size="7"
+                    value={selectedzone ? selectedzone.userZone : ''}
+                    onChange={handleChange}
                   >
-                    <option value="PNCT">PNCT</option>
-                    <option value="APM">APM</option>
-                    <option value="MAHER">MAHER</option>
-                    <option value="Global Staten Island">
-                      Global Staten Island
-                    </option>
-                    <option value="Global Bayonne">Global Bayonne</option>
-                    <option value="Auto berth">Auto berth</option>
-                    <option value="Jersey Gardens Door 5">
-                      Jersey Gardens Door 5
-                    </option>
-                    <option value="Seamans Center">Seamans Center</option>
+                      {
+                          allzones.map(zone => (
+                              <option value={zone.userZone}>{zone.userZone}</option>
+                          ))
+                      }
                   </select>
+                </div>
+                <div>
+                  <LocationSelector
+                      handleSelectZone={setSelectedZone}
+                      selectedzone={selectedzone} />
                 </div>
                 <div className="form-group">
                   <label htmlFor={taskEndPoint}>Drop off point</label>
@@ -234,7 +242,7 @@ let dateNowLocal= dateNow.toLocaleString();
                     <option value="PNCT">PNCT</option>
                     <option value="APM">APM</option>
                     <option value="MAHER">MAHER</option>
-                    <option value="Global Staten Island">
+                    <option value="Global Staten Island" >
                       Global Staten Island
                     </option>
                     <option value="Global Bayonne">Global Bayonne</option>
