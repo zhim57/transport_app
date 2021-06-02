@@ -4,10 +4,31 @@ import { Redirect } from "react-router-dom";
 // import "./style.scss";
 import API from "../utils/API";
 import UserContext from "../utils/UserContext";
+import LocationSelector from "./LocationSelector";
+import data from '../utils/data';
+import {Modal, Button} from 'react-bootstrap';
 
 const Settask = function (props) {
-  //====================
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
+    const [allzones, setAllZones] = useState(data)
+    const [selectedZone, setSelectedZone] = useState(null)
+    const [nearestZone, setNearestZone] = useState(null);
+    const [otherZones, setOtherZones] = useState([]);
+ const handleChange = (event) =>
+  {
+      const zone = data.find((data) => data.userZone === event.target.value);
+      setSelectedZone(zone);
+  }
+const handleClick = (event) =>
+{
+   const ele= document.querySelector(".formik")
+    if(ele.classList.contains('d-none')){
+        ele.classList.remove("d-none")
+    }
+}
   const {
     userId,
     email,
@@ -19,12 +40,9 @@ const Settask = function (props) {
     profilePicture,
     vesselEmail,
     phoneNumber,
-    //  updateUserContextData,
   } = useContext(UserContext);
   const [tasks1, setTasks1] = useState([]);
   const [redirectToReferrer, setRedirectToReferrer] = useState(false);
-
-  // console.log(tasks1);
   const clientEmailInput = useRef();
   const taskStartPointInput = useRef();
   const taskEndPointInput = useRef();
@@ -34,9 +52,6 @@ const Settask = function (props) {
   const peopleCountInput = useRef();
   const vesselNameInput = useRef();
   const vesselEmailInput = useRef();
-
-  // const [passwordGood, setpasswordGood] = useState(true)
-
   let extraProps = {};
   if (props.className) {
     extraProps.className = props.className;
@@ -59,87 +74,23 @@ const Settask = function (props) {
   let clientEmail = props.className
     ? props.className + "-clientEmail"
     : "clientEmail";
-
-  // let clientNameFirst = props.className
-  //   ? props.className + "-clientNameFirst"
-  //   : "clientNameFirst";
-  // let clientNameLast = props.className
-  //   ? props.className + "-clientNameLast"
-  //   : "clientNameLast";
-  // let clientEmail = props.className
-  //   ? props.className + "-clientEmail"
-  //   : "clientEmail";
-  //   let vesselName = props.className
-  //   ? props.className + "-vesselName"
-  //   : "vesselName";
-  //   let vesselEmail = props.className
-  //   ? props.className + "-vesselEmail"
-  //   : "vesselEmail";
   let peopleCount = props.className
     ? props.className + "-peopleCount"
     : "peopleCount";
-
-  // let passwordId = props.className ? props.className + "-signup-password" : "signup-password";
-  // let nameId = props.className ? props.className + "-signup-name" : "signup-name";
-  // let roleId = props.className ? props.className + "-signup-role" : "signup-role";
-
-  // taskStartPoint v
-  // taskEndPoint v
-  // timeTargetTime v
-  // clientNameFirst v
-  // clientNameLast v
-  // clientEmail v
-  // peopleCount v
-  // vesselName v
-
   const handleSubmit = (event) => {
-    // if the user hits enter or hits the button, this function will fire
     event.preventDefault();
-
-    API.getTasks()
-      .then((res) => setTasks1(res.data))
-      // .then(console.log(tasks1))
-      .catch((err) => console.log(err));
-
-    // console.log("already available values");
-    // console.log(
-    //   userId,
-    //   email,
-    //   role,
-    //   nameFirst,
-    //   nameLast,
-    //   vesselName,
-    //   position,
-    //   profilePicture,
-    //   vesselEmail,
-    //   phoneNumber
-    // );
-let dateNow =new Date(Date.now());
-let dateNowLocal= dateNow.toLocaleString();
-// console.log("dateNow")
-// console.log(dateNow)
-// console.log("dateNowLocal")
-// console.log(dateNowLocal)
-
-    API.saveTasks({
-      // clientEmail: clientEmailInput.current.value,
-      // taskStartPoint: taskStartPointInput.current.value,
-      // taskEndPoint: taskEndPointInput.current.value,
-      // timeTargetTime: timeTargetTimeInput.current.value,
-      // timeCreated: dateNow,
-      // clientNameFirst: clientNameFirstInput.current.value,
-      // clientNameLast: clientNameLastInput.current.value,
-      // peopleCount: peopleCountInput.current.value,
-      // vesselName: vesselNameInput.current.value,
-      clientEmail: email,
-      taskStartPoint: taskStartPointInput.current.value,
+    let dateNow =new Date(Date.now());
+    let dateNowLocal= dateNow.toLocaleString();
+    const taskData = {
+      clientEmail: clientEmailInput.current.value,
+      taskStartPoint: selectedZone ? selectedZone.pickupName : '',
       taskEndPoint: taskEndPointInput.current.value,
       timeTargetTime: timeTargetTimeInput.current.value,
       timeCreated: dateNowLocal,
-      clientNameFirst: nameFirst,
-      clientNameLast: nameLast,
+      clientNameFirst: clientNameFirstInput.current.value,
+      clientNameLast: clientNameLastInput.current.value,
       peopleCount: peopleCountInput.current.value,
-      vesselName: vesselName,
+      vesselName: vesselNameInput.current.value,
       description: "Transport",
       taskNumber: tasks1.length - 1,
       clientImage: profilePicture,
@@ -147,8 +98,13 @@ let dateNowLocal= dateNow.toLocaleString();
       driverName: "Placeholder",
       vehicleImage: "./vanImage.png",
       vehiclePlate: "placeholder",
-      vesselEmail: vesselEmail,
-    })
+      vesselEmail: vesselEmailInput.current.value,
+    };
+    API.getTasks()
+      .then((res) => setTasks1(res.data))
+      // .then(console.log(tasks1))
+      .catch((err) => console.log(err));
+ API.saveTasks({...taskData})
       .then((data) => {
         // console.log(data);
 
@@ -190,7 +146,6 @@ let dateNowLocal= dateNow.toLocaleString();
          
       }
   }
-  //======================
 
   return (
     <Fragment>
@@ -198,31 +153,80 @@ let dateNowLocal= dateNow.toLocaleString();
         if (redirectToReferrer === false) {
           return (
             <div className="container">
-              <h1>Settask page</h1>
 
+
+              <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Choose a location</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <div className={'text-center'}>
+                    {
+                      otherZones.map(zone => (
+                          <Button
+                              className={'m-2'}
+                              variant={zone === selectedZone ? 'success' : 'primary'}
+                              onClick={() => setSelectedZone(zone)}
+                          >
+                            {zone.userZone} - {zone.distance.toFixed(2)} km
+                          </Button>
+                      ))
+                    }
+                  </div>
+                </Modal.Body>
+              </Modal>
+              <br/>
+              <h1>Settask page</h1>
               <form {...extraProps} onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label htmlFor={taskStartPoint}>Pickup point</label>
-                  <select
-                    className="form-control"
+                    <div>
+                        <LocationSelector
+                            handleSetOtherZones={setOtherZones}
+                            handleSetNearestZone={setNearestZone}
+                            handleSelectZone={setSelectedZone}
+                            selectedZone={selectedZone} />
+
+                      {
+                        nearestZone ?
+                            <>
+                              <Button
+                                  onClick={() => setSelectedZone(nearestZone)}
+                                  variant={nearestZone === selectedZone ? 'success' : 'primary'}>
+                                {nearestZone.userZone} - {nearestZone.distance.toFixed(2)} km</Button>
+                              <Button className={'ml-md-2 ml-xs-0 mt-xs-4'} variant="primary" onClick={handleShow}>Choose another location</Button>
+                            </>
+                            : null
+                      }
+
+                      {
+                        selectedZone ?
+                            <p className="mt-3">
+                              Selected Location: <span>
+                                {selectedZone.userZone} - {selectedZone.distance.toFixed(2)} km
+                              </span>
+                            </p> : null
+                      }
+
+                    {/*<button onClick={handleClick}>Choose An option</button>*/}
+
+                    </div>
+                        <select
+                    className="form-control formik d-none"
                     ref={taskStartPointInput}
                     id={taskStartPoint}
                     size="7"
+                    value={selectedZone ? selectedZone.userZone : ''}
+                    onChange={handleChange}
                   >
-                    <option value="PNCT">PNCT</option>
-                    <option value="APM">APM</option>
-                    <option value="MAHER">MAHER</option>
-                    <option value="Global Staten Island">
-                      Global Staten Island
-                    </option>
-                    <option value="Global Bayonne">Global Bayonne</option>
-                    <option value="Auto berth">Auto berth</option>
-                    <option value="Jersey Gardens Door 5">
-                      Jersey Gardens Door 5
-                    </option>
-                    <option value="Seamans Center">Seamans Center</option>
+                      {
+                          allzones.map(zone => (
+                              <option value={zone.userZone}>{zone.pickupName}</option>
+                          ))
+                      }
                   </select>
                 </div>
+
                 <div className="form-group">
                   <label htmlFor={taskEndPoint}>Drop off point</label>
                   <select
@@ -234,7 +238,7 @@ let dateNowLocal= dateNow.toLocaleString();
                     <option value="PNCT">PNCT</option>
                     <option value="APM">APM</option>
                     <option value="MAHER">MAHER</option>
-                    <option value="Global Staten Island">
+                    <option value="Global Staten Island" >
                       Global Staten Island
                     </option>
                     <option value="Global Bayonne">Global Bayonne</option>
