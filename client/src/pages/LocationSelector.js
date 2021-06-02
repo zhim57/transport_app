@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import data from '../utils/data';
 
 const LocationSelector = (props) => {
-    const {handleSelectZone} = props;
+    const {handleSelectZone, handleSetNearestZone, handleSetOtherZones} = props;
     const [state, setState] =useState({
         loaded:false,
         coordinates : { lat: "", lng: ""},
@@ -31,6 +31,8 @@ const LocationSelector = (props) => {
 
     useEffect(() => {
         if (state.coordinates.lat) {
+            // console.log(props)
+            // alert(JSON.stringify(props))
             const distance = calcDistance(state.coordinates, props.selectedzone.location)
             setState({
                 ...state,
@@ -51,14 +53,19 @@ const LocationSelector = (props) => {
         results.sort((a, b) => {
            return a.distance - b.distance;
         });
-        return results[0];
+        if (results.length && results.length > 5) {
+            return results.slice(0, 5);
+        }
+        return results;
     }
     const onSuccess = location => {
         const receiving = getMinimumDistance({
             lat: location.coords.latitude,
             lng: location.coords.longitude
         }, data);
-        handleSelectZone(receiving);
+        // handleSelectZone(receiving[0]);
+        handleSetNearestZone(receiving.splice(0, 1)[0]);
+        handleSetOtherZones(receiving);
         setState({
             loaded:true,
             coordinates: {
@@ -81,20 +88,10 @@ const LocationSelector = (props) => {
         navigator.geolocation.getCurrentPosition(onSuccess, onError)
     }, [])
     return (
-        <div className={'container mt-4 mb-4'}>
-            <h3>User Selected Location</h3>
+        <div className={'container mb-4'}>
+            <h3>User Coordinates</h3>
             <p>Latitude: {state.coordinates.lat}</p>
             <p>Longitude: {state.coordinates.lng}</p>
-            <h3>Nearest Locaiton</h3>
-            {
-                state.receivingLocation ?
-                    <>
-                        <p>Zone : {props && props.selectedzone ? props.selectedzone.userZone : state.receivingLocation.userZone}</p>
-                        <p>Pickup Location : {props && props.selectedzone ? props.selectedzone.pickupName : state.receivingLocation.pickupName}</p>
-                    <p> Distance: {state.receivingLocation.distance.toFixed(2)} km</p>
-                    </>
-                    : null
-            }
         </div>
     )
 }
