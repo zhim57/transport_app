@@ -29,6 +29,7 @@ const LocationSelector = (props) => {
         return c;
     }
 
+
     useEffect(() => {
         if (state.coordinates.lat) {
             // console.log(props)

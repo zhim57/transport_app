@@ -53,5 +53,17 @@ const data = [
         pickupName: 'Global Bayonne -visitor gate',
         location: {lat: 45.67611442693582, lng: -74.08839520362037}
     },
+    {
+        userZone: 'Data Darbar',
+        corner1: {lat: 31.5789, lng: 74.3044},
+        pickupName: 'darbar -main gate',
+        location: {lat: 31.5789, lng: 74.3044},
+    },
+    {
+        userZone: 'chungi',
+        corner1: {lat: 31.4961, lng: 74.264},
+        pickupName: 'chungi -main park',
+        location: {lat: 31.4961, lng: 74.264},
+    },
 ]
 export default data;

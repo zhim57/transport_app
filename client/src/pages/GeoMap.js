@@ -1,10 +1,27 @@
 import React, { Component } from 'react';
-import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
+import { Map, GoogleApiWrapper, InfoWindow, Marker} from 'google-maps-react';
 
 const mapStyles = {
     width: '70%',
     height: '70%'
 };
+
+const distancecalculate = (lat, lng) => {
+    const distance = lng-lat;
+    return distance;
+}
+const finalpoint = distancecalculate(31.4961, 74,264)
+console.log(finalpoint.toFixed(2))
+
+
+const timecalculate =(Speed, distance) =>{
+    const time = Speed/distance;
+    return time;
+    console.log(distance)
+}
+const result = timecalculate(60, 42)
+console.log(result.toFixed(0))
+
 
 export class MapContainer extends Component {
     state = {
@@ -33,6 +50,7 @@ export class MapContainer extends Component {
     };
     render() {
         return (
+            <>
             <Map
                 className="mt-5 ml-5"
                 google={this.props.google}
@@ -48,6 +66,8 @@ export class MapContainer extends Component {
                 <Marker
                     onClick={this.onMarkerClick}
                     name={'Darbar'}
+                    slug={'Darbar'}
+                    key={1}
                     position={
                         {
                             lat: 31.5789,
@@ -84,12 +104,18 @@ export class MapContainer extends Component {
                         <h4>{this.state.selectedPlace.name} ( {this.state.selectedPlace.position ? this.state.selectedPlace.position.lat + ' , ' + this.state.selectedPlace.position.lng:""})</h4>
                     </div>
                 </InfoWindow>
-            </Map>
 
+            </Map>
+        <div className="m-5">
+            <span> Duration : <bold>{result.toFixed(2)} mins.</bold></span>
+            <br/>
+            <span> Distance : <bold>{finalpoint.toFixed(2)} km.</bold></span>
+        </div>
+            </>
         );
     }
 }
 
 export default GoogleApiWrapper({
-    apiKey: 'AIzaSyBghisw5q1SchKwdmZpQyTj3Mpugd73ACQ'
+    apiKey: 'AIzaSyC5LqGDvUU893C_dwX4Df6wzc4n3vwmrsM'
 })(MapContainer);

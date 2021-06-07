@@ -17,6 +17,7 @@ import API from "./utils/API";
 import DriversScreen from "./components/driversScreen";
 import ClientScreen from "./components/clientScreen";
 import DispatcherScreen from "./components/dispatcherScreen";
+import LocationMaps from "./pages/LocationMaps";
 
 function App() {
   const [email, setEmail] = useState("");
@@ -120,6 +121,7 @@ function App() {
             <Switch>
               <Route exact path="/tasks" component={Tasks} />
               <Route exact path="/location" component={LocationSelector} />
+              <Route exact path="/location-map" component={LocationMaps} />
               <Route exact path="/geomap" component={GeoMap} />
               <Route exact path="/profile" component={Profile}>
                 <Profile></Profile>

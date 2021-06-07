@@ -13,23 +13,6 @@ function ClientScreen() {
     const consumerInfo = (value) => {
         value1 = value
       };
-    //   console.log(value1);
-// console.log(role);
-// console.log(nameFirst);
-// console.log(loggedIn);
-  
-// if (role === "customer") {
-
-//     console.log("welcome!")
-    
-// }
-//  else{
-//     // <Redirect to={redirect_path}/>
-// }
-// history.pushState("/");
-
-
-// Load all tasks and store them with settasks
 
 useEffect(() => {
     if (value1.email){
@@ -37,28 +20,11 @@ useEffect(() => {
     }
 },[] );
 
-//   console.log(tasks);
-
-// Loads all tasks and sets them to tasks
 function loadTasks(email) {
   API.getTasks()
     .then((res) => {
         let allTasks = res.data;
-        // let userTasks = allTasks.filter(allTask => allTask.clientEmail === value1.email);
-
-        // let active1Tasks=userTasks.filter(usertask => usertask.aborted !== true);
-        // let activeTasks=active1Tasks.filter(active1task => active1task.completed !== true);
-        // console.log("email");
-        // console.log(email);
-        // console.log("allTasks");
-        // console.log(allTasks);
-        // console.log("userTasks");
-        // console.log(userTasks);
-        // console.log("activeTasks");
-        // console.log(activeTasks);
-        // setTasks(activeTasks);
         setTimeout(() => setTasks(allTasks), 100);
-    
     
     })
     .catch((err) => console.log(err));
@@ -97,11 +63,6 @@ return (
         if (value1.email) {
             return(
 <div>
-   
-          
-    
-
-
             <h1> Greetings {nameFirst}</h1>
                 <TaskListDispatcher tasks={tasks} role={value1.role} refreshTasks={refreshTasks} passAbort={((id) => passAbort(id))} passComplete={((id) => passComplete(id))}/>
         </div>
@@ -111,7 +72,7 @@ return (
                 return(
                     <div>
               <Redirect to="/" />
-            </div> 
+            </div>
                 )
             }
         })()}

@@ -29,6 +29,18 @@ const handleClick = (event) =>
         ele.classList.remove("d-none")
     }
 }
+
+
+    const timecalculate =() =>{
+     const speed = 60;
+      let zone =   selectedZone && selectedZone.distance ? selectedZone.distance.toFixed(2): 10
+        const time = speed/zone;
+        return time;
+        console.log(zone)
+ }
+  const result = timecalculate()
+    console.log(result.toFixed(0))
+
   const {
     userId,
     email,
@@ -153,8 +165,6 @@ const handleClick = (event) =>
         if (redirectToReferrer === false) {
           return (
             <div className="container">
-
-
               <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                   <Modal.Title>Choose a location</Modal.Title>
@@ -205,6 +215,9 @@ const handleClick = (event) =>
                               Selected Location: <span>
                                 {selectedZone.userZone} - {selectedZone.distance.toFixed(2)} km
                               </span>
+                                <div className="mb-3 mt-3">
+                                    <span> Duration : <bold>{result.toFixed(0)} mins.</bold></span>
+                                </div>
                             </p> : null
                       }
 
@@ -249,6 +262,9 @@ const handleClick = (event) =>
                     <option value="Seamans Center">Seamans Center</option>
                   </select>
                 </div>
+                  <div className="mt-5 mb-5">
+                      here is the total time data :<span></span>
+                  </div>
                 <div className="form-group">
                   <label htmlFor={timeTargetTime}>Pickup Time</label>
                   <input

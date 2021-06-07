@@ -98,11 +98,6 @@ return (
         if (value1.email) {
             return(
 <div>
-   
-          
-    
-
-
             <h1> Greetings {nameFirst}</h1>
                 <TaskListClient tasks={tasks} role={value1.role} refreshTasks={refreshTasks} passAbort={((id) => passAbort(id))} passComplete={((id) => passComplete(id))}/>
         </div>
@@ -112,7 +107,7 @@ return (
                 return(
                     <div>
               <Redirect to="/" />
-            </div> 
+            </div>
                 )
             }
         })()}
