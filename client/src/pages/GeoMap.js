@@ -1,60 +1,84 @@
-import React, { Component } from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import { Map, GoogleApiWrapper, InfoWindow, Marker} from 'google-maps-react';
 
-const mapStyles = {
-    width: '70%',
-    height: '70%'
-};
 
-const distancecalculate = (lat, lng) => {
-    const distance = lng-lat;
-    return distance;
-}
-const finalpoint = distancecalculate(31.4961, 74,264)
-console.log(finalpoint.toFixed(2))
+const MapContainer = (props) => {
 
-
-const timecalculate =(Speed, distance) =>{
-    const time = Speed/distance;
-    return time;
-    console.log(distance)
-}
-const result = timecalculate(60, 42)
-console.log(result.toFixed(0))
-
-
-export class MapContainer extends Component {
-    state = {
-        showingInfoWindow: false,  // Hides or shows the InfoWindow
-        activeMarker: {},          // Shows the active marker upon click
-        selectedPlace: {}          // Shows the InfoWindow to the selected place upon a marker
+    const mapStyles = {
+        width: '70%',
+        height: '70%'
     };
 
-    onMarkerClick = (props, marker, e) =>{
-        this.setState({
+    const [state, setState] =useState({
+        showingInfoWindow: false,  // Hides or shows the InfoWindow
+        activeMarker: {},          // Shows the active marker upon click
+        selectedPlace: {},
+        loaded:false,
+        coordinates : { lat: "", lng: ""},
+        receivingLocation: null
+    });
+
+    const onSuccess = location => {
+        setState({
+            loaded:true,
+            coordinates: {
+                lat: location.coords.latitude,
+                lng: location.coords.longitude,
+            }
+        });
+    };
+    const onError = error => {
+        setState({
+            loaded:true,
+            error,
+        });
+    };
+    useEffect(() =>{
+        if( !("geolocation" in navigator)){
+            alert("Navigator is not available here");
+        }
+        navigator.geolocation.getCurrentPosition(onSuccess, onError)
+    }, [])
+
+
+    const distancecalculate = (lat, lng) => {
+        const distance = lng-lat;
+        return distance;
+    }
+    const finalpoint = distancecalculate(31.4961, 74,264)
+    console.log(finalpoint.toFixed(2))
+
+
+    const timecalculate =(Speed, distance) =>{
+        const time = Speed/distance;
+        return time;
+        console.log(distance)
+    }
+    const result = timecalculate(60, 42)
+    console.log(result.toFixed(0))
+
+   const onMarkerClick = (props, marker, e) =>{
+        setState({
             selectedPlace: props,
             activeMarker: marker,
             showingInfoWindow: true
-        }
-        )
-    console.log(props)
+        })
     };
 
-    onClose = props => {
-        if (this.state.showingInfoWindow) {
-            this.setState({
+    const onClose = props => {
+        if (state.showingInfoWindow) {
+            setState({
                 showingInfoWindow: false,
                 activeMarker: null
             });
         }
     };
-    render() {
         return (
             <>
             <Map
                 className="mt-5 ml-5"
-                google={this.props.google}
-                zoom={14}
+                google={props.google}
+                zoom={10}
                 style={mapStyles}
                 initialCenter={
                     {
@@ -63,21 +87,20 @@ export class MapContainer extends Component {
                     }
                 }
             >
+
+                        <Marker
+                            onClick={onMarkerClick}
+                            name={'Current'}
+                            position={
+                                {
+                                    lat: 31.6211,
+                                    lng: 74.2824
+                                }
+                            }
+                        />
                 <Marker
-                    onClick={this.onMarkerClick}
-                    name={'Darbar'}
-                    slug={'Darbar'}
-                    key={1}
-                    position={
-                        {
-                            lat: 31.5789,
-                            lng: 74.3044
-                        }
-                    }
-                />
-                <Marker
-                    onClick={this.onMarkerClick}
-                    name={'Chungi'}
+                    onClick={onMarkerClick}
+                    name={'Dispatcher'}
                     position={
                         {
                             lat: 31.4961,
@@ -86,8 +109,8 @@ export class MapContainer extends Component {
                     }
                 />
                 <Marker
-                    onClick={this.onMarkerClick}
-                    name={'gajumata'}
+                    onClick={onMarkerClick}
+                    name={'Driver'}
                     position={
                         {
                             lat: 31.3862,
@@ -96,13 +119,17 @@ export class MapContainer extends Component {
                     }
                 />
                 <InfoWindow
-                    marker={this.state.activeMarker}
-                    visible={this.state.showingInfoWindow}
-                    onClose={this.onClose}
+                    marker={state.activeMarker}
+                    visible={state.showingInfoWindow}
+                    onClose={onClose}
                 >
                     <div>
-                        <h4>{this.state.selectedPlace.name} ( {this.state.selectedPlace.position ? this.state.selectedPlace.position.lat + ' , ' + this.state.selectedPlace.position.lng:""})</h4>
-                    </div>
+                        {
+                            state.selectedPlace ?
+
+                        <h4>{state.selectedPlace.name} ( {state.selectedPlace.position ? state.selectedPlace.position.lat + ' , ' + state.selectedPlace.position.lng:""})</h4>
+                        : ''}
+                        </div>
                 </InfoWindow>
 
             </Map>
@@ -113,7 +140,6 @@ export class MapContainer extends Component {
         </div>
             </>
         );
-    }
 }
 
 export default GoogleApiWrapper({
