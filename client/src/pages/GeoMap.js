@@ -19,6 +19,7 @@ const MapContainer = (props) => {
     });
 
     const onSuccess = location => {
+        console.log(location);
         setState({
             loaded:true,
             coordinates: {
@@ -39,27 +40,20 @@ const MapContainer = (props) => {
         }
         navigator.geolocation.getCurrentPosition(onSuccess, onError)
     }, [])
-
-
     const distancecalculate = (lat, lng) => {
         const distance = lng-lat;
         return distance;
     }
     const finalpoint = distancecalculate(31.4961, 74,264)
-    console.log(finalpoint.toFixed(2))
-
-
     const timecalculate =(Speed, distance) =>{
         const time = Speed/distance;
         return time;
-        console.log(distance)
     }
     const result = timecalculate(60, 42)
-    console.log(result.toFixed(0))
-
    const onMarkerClick = (props, marker, e) =>{
         setState({
-            selectedPlace: props,
+            ...state,
+            selectedPlace: {name: props.name, position: props.position},
             activeMarker: marker,
             showingInfoWindow: true
         })
@@ -68,6 +62,7 @@ const MapContainer = (props) => {
     const onClose = props => {
         if (state.showingInfoWindow) {
             setState({
+                ...state,
                 showingInfoWindow: false,
                 activeMarker: null
             });
@@ -75,6 +70,9 @@ const MapContainer = (props) => {
     };
         return (
             <>
+
+                <p>{state.coordinates.lat}</p>
+                <p>{state.coordinates.lng}</p>
             <Map
                 className="mt-5 ml-5"
                 google={props.google}
@@ -90,7 +88,7 @@ const MapContainer = (props) => {
 
                         <Marker
                             onClick={onMarkerClick}
-                            name={'Current'}
+                            name={'Driver'}
                             position={
                                 {
                                     lat: 31.6211,
@@ -110,11 +108,11 @@ const MapContainer = (props) => {
                 />
                 <Marker
                     onClick={onMarkerClick}
-                    name={'Driver'}
+                    name={'Current'}
                     position={
                         {
-                            lat: 31.3862,
-                            lng: 74.3661
+                            lat: state.coordinates.lat,
+                            lng: state.coordinates.lng
                         }
                     }
                 />
