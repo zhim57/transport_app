@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import styles from './map.module.css';
 import car from './car.png';
+import withLiveLocation from "./withLiveLocation";
 
 const {compose, withProps, withStateHandlers} = require("recompose");
 const {
@@ -12,6 +13,10 @@ const {
     InfoWindow,
 } = require("react-google-maps");
 const MapWithAMakredInfoWindow = compose(
+    withProps({
+        googleMapURL:`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAP_API_KEY}&v=3.exp&libraries=geometry,drawing,places`,
+        loadingElement:<div style={{height: `100%`}}/>
+    }),
     withStateHandlers(() => ({
         isOpen: false,
     }), {
@@ -27,34 +32,20 @@ const MapWithAMakredInfoWindow = compose(
         isOpen: false,
         pickupLocation: {lat: 31.4233882, lng: 74.3771547},
         driverLocation: {lat: 31.4314, lng: 74.3485},
-        coordinates: null
+        showInfo: false
     });
-    const onSuccess = location => {
+    const toggleInfo = () => {
         setState({
             ...state,
-            coordinates: {
-                lat: location.coords.latitude,
-                lng: location.coords.longitude,
-            }
-        });
-    };
-    const onError = error => {
-        setState({
-            error,
-        });
-    };
+            showInfo: !state.showInfo
+        })
+    }
     const {pickupLocation, driverLocation} = state;
     useEffect(() => {
-        if (!("geolocation" in navigator)) {
-            alert("Navigator is not available here");
-        }
-        navigator.geolocation.getCurrentPosition(onSuccess, onError)
-    }, []);
-    useEffect(() => {
-        if (state.coordinates) {
+        if (props.coordinates) {
             try {
                 const directionsService = new window.google.maps.DirectionsService();
-                const origin = state.coordinates;
+                const origin = props.coordinates;
                 const destination = pickupLocation;
                 let distance;
                 let duration;
@@ -67,7 +58,6 @@ const MapWithAMakredInfoWindow = compose(
                     },
                     (result, status) => {
                         if (status === window.google.maps.DirectionsStatus.OK) {
-                            console.log("result", result);
                             distance = result.routes[0].legs[0].distance.text;
                             duration = result.routes[0].legs[0].duration.text;
                             setState({
@@ -79,7 +69,6 @@ const MapWithAMakredInfoWindow = compose(
                                 pickupLocationName: result.routes[0].legs[0].end_address
                             });
                         } else {
-                            alert("error");
                             console.error(`error fetching directions ${result}`);
                         }
                     }
@@ -88,9 +77,9 @@ const MapWithAMakredInfoWindow = compose(
                 alert(err.message);
             }
         }
-    }, [state.coordinates]);
+    }, [props.coordinates]);
     useEffect(() => {
-        if (state.coordinates) {
+        if (props.coordinates) {
             try {
                 const directionsService = new window.google.maps.DirectionsService();
                 // calculate eta and draw route between my location and pickup point
@@ -102,7 +91,6 @@ const MapWithAMakredInfoWindow = compose(
                     },
                     (result, status) => {
                         if (status === window.google.maps.DirectionsStatus.OK) {
-                            console.log("result2", result);
                             setState({
                                 ...state,
                                 driver: {
@@ -124,8 +112,16 @@ const MapWithAMakredInfoWindow = compose(
     return (
         <div>
             {
-                state.distance ?
+                state.distance && !state.showInfo ?
+                    <div className={styles.infoBox} onClick={toggleInfo}>
+                        <i className={`fa fa-info`}></i>
+                    </div> : null
+            }
+            {
+                state.distance && state.showInfo ?
                     <div id='output' className={styles.output}>
+                        <div>
+                        <i onClick={toggleInfo} className={`fa fa-times-circle ${styles.close}`}></i>
                         <b>My Location</b><br/>
                         Location: {state.myLocationName} <br/>
                         Pickup Location: {state.pickupLocationName} <br/>
@@ -140,14 +136,18 @@ const MapWithAMakredInfoWindow = compose(
                                     Distance: {state.driver.distance}
                                 </> : null
                         }
+                        </div>
                     </div> : null
             }
             <GoogleMap
                 zoom={11}
-                defaultCenter={{lat: 31.4626, lng: 74.3309}}
+                defaultCenter={state.pickupLocation}
             >
                 <DirectionsRenderer
                     directions={state.directions}
+                    options={{
+                        preserveViewport: true
+                    }}
                 />
                 <Marker
                     icon={car}
@@ -163,14 +163,16 @@ const MapWithAMakredInfoWindow = compose(
     )
 });
 
-const Map = () => {
+const Map = compose(withLiveLocation)((props) => {
     return (
+        <>
         <MapWithAMakredInfoWindow
-            googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAP_API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
-            loadingElement={<div style={{height: `100%`}}/>}
+            coordinates={props.coordinates}
+            counter={props.counter}
             containerElement={<div style={{height: `calc(100vh - 120px)`}}/>}
             mapElement={<div style={{height: `100%`}}/>}
         />
+        </>
     )
-};
+});
 export default Map;
