@@ -19,7 +19,7 @@ const MapContainer = (props) => {
     });
 
     const onSuccess = location => {
-        console.log(location);
+        alert("success");
         setState({
             loaded:true,
             coordinates: {
@@ -29,6 +29,7 @@ const MapContainer = (props) => {
         });
     };
     const onError = error => {
+        alert("error");
         setState({
             loaded:true,
             error,

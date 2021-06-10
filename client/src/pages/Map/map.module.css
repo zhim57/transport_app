@@ -1,0 +1,9 @@
+
+.output {
+    position: fixed;
+    top: 130px;
+    right: 60px;
+    background: white;
+    padding: 10px 20px;
+    text-align: left;
+}

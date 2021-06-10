@@ -9,6 +9,7 @@ import Logout from "./pages/Logout";
 import SignUp from "./pages/SignUp";
 import GeoMap from "./pages/GeoMap";
 import LocationSelector from "./pages/LocationSelector";
+import Map from './pages/Map/index';
 // import TaskList from "./components/TaskList";
 import Tasks from "./pages/Tasks";
 import Profile from "./pages/Profile";
@@ -122,7 +123,7 @@ function App() {
               <Route exact path="/tasks" component={Tasks} />
               <Route exact path="/location" component={LocationSelector} />
               <Route exact path="/location-map" component={LocationMaps} />
-              <Route exact path="/geomap" component={GeoMap} />
+              <Route exact path="/geomap" component={Map} />
               <Route exact path="/profile" component={Profile}>
                 <Profile></Profile>
               </Route>

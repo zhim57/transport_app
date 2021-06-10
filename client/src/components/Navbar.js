@@ -116,7 +116,7 @@ background: var(--mainBlue);
 flex-direction: row;
 background-color: #282c34;
 padding:10px;
-margin-top: 20px;
+margin-top: 0px;
 color:white;
 }
 `
