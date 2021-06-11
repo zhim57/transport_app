@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import styles from './map.module.css';
 import car from './car.png';
+import Driver from './Driver';
 import withLiveLocation from "./withLiveLocation";
 
 const {compose, withProps, withStateHandlers} = require("recompose");
@@ -15,6 +16,7 @@ const {
 const MapWithAMakredInfoWindow = compose(
     withProps({
         googleMapURL:`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAP_API_KEY}&v=3.exp&libraries=geometry,drawing,places`,
+        // googleMapURL:`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places`,
         loadingElement:<div style={{height: `100%`}}/>
     }),
     withStateHandlers(() => ({
@@ -31,7 +33,6 @@ const MapWithAMakredInfoWindow = compose(
         directions: null,
         isOpen: false,
         pickupLocation: {lat: 31.4233882, lng: 74.3771547},
-        driverLocation: {lat: 31.4314, lng: 74.3485},
         showInfo: false
     });
     const toggleInfo = () => {
@@ -140,8 +141,8 @@ const MapWithAMakredInfoWindow = compose(
                     </div> : null
             }
             <GoogleMap
-                zoom={11}
-                defaultCenter={state.pickupLocation}
+                zoom={15}
+                defaultCenter={{lat: 18.562339, lng: -68.410725}}
             >
                 <DirectionsRenderer
                     directions={state.directions}
@@ -149,15 +150,14 @@ const MapWithAMakredInfoWindow = compose(
                         preserveViewport: true
                     }}
                 />
-                <Marker
+                <Driver
                     icon={car}
                     position={driverLocation}
-                    onClick={props.onToggleOpen}
                 >
                     {props.isOpen && <InfoWindow onCloseClick={props.onToggleOpen}>
                         Driver
                     </InfoWindow>}
-                </Marker>
+                </Driver>
             </GoogleMap>
         </div>
     )
